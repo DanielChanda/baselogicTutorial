@@ -1,0 +1,323 @@
+{
+  "version": "2.0.0",
+  "last_updated": "2026-08-25T16:00:00Z",
+  "tracks": [
+    {
+      "id": "number_systems",
+      "title": "Number Systems & Digital Codes",
+      "description": "Master radix conversions, BCD, Gray code, and positional numbering systems.",
+      "icon": "numbers",
+      "color": "0xFF2196F3",
+      "lessons": [
+        {
+          "id": "intro_bases",
+          "title": "Introduction to Number Systems",
+          "summary": "Understanding positional notation, binary, octal, decimal, and hexadecimal radices.",
+          "read_time_minutes": 4,
+          "difficulty": "Beginner",
+          "tags": ["Base 2", "Base 10", "Base 16", "Radix"],
+          "content_markdown": "### Positional Number Systems\n\nA **number system** represents values using distinct digits weighted by powers of their base (radix $r$):\n\n$$\\text{Value} = \\sum_{i=-m}^{n-1} d_i \\cdot r^i$$\n\n#### Primary Radices in Computer Science:\n* **Binary (Base 2)**: Digits $\\{0, 1\\}$. Fundamental for digital transistor logic.\n* **Octal (Base 8)**: Digits $\\{0..7\\}$. Compact representation grouping 3 binary bits.\n* **Decimal (Base 10)**: Digits $\\{0..9\\}$. Standard human decimal system.\n* **Hexadecimal (Base 16)**: Digits $\\{0..9, A..F\\}$. Standard for memory addresses, grouping 4 binary bits (1 nibble).\n\n#### Comparative Value Mappings:\n| Decimal | Binary | Octal | Hex |\n|:---:|:---:|:---:|:---:|\n| 0 | 0000 | 0 | 0 |\n| 5 | 0101 | 5 | 5 |\n| 10 | 1010 | 12 | A |\n| 15 | 1111 | 17 | F |\n| 16 | 0001 0000 | 20 | 10 |",
+          "action_link": {
+            "type": "converter",
+            "label": "Convert 255 in Base Converter",
+            "payload": "255",
+            "mode": "10"
+          },
+          "media": [
+            {
+              "type": "link",
+              "title": "Number Systems Overview Reference",
+              "url": "https://en.wikipedia.org/wiki/Positional_notation",
+              "caption": "In-depth mathematical formulation of positional numeral systems."
+            }
+          ],
+          "quiz": [
+            {
+              "question": "How many binary bits are represented by a single hexadecimal digit?",
+              "options": ["2 bits", "3 bits", "4 bits (1 nibble)", "8 bits (1 byte)"],
+              "correct_index": 2,
+              "explanation": "Because 2⁴ = 16, exactly 4 binary bits map to 1 hexadecimal digit."
+            }
+          ]
+        },
+        {
+          "id": "base_conversions",
+          "title": "Base Conversion Techniques",
+          "summary": "Master repeated division, polynomial expansion, and direct power-of-two bit grouping.",
+          "read_time_minutes": 6,
+          "difficulty": "Beginner",
+          "tags": ["Division Method", "Bit Grouping", "Fractional Conversion"],
+          "content_markdown": "### Conversion Methods\n\n#### 1. Decimal to Any Base (Repeated Division)\nDivide the decimal integer repeatedly by base $r$ and collect remainders from **bottom to top** (MSB to LSB):\n\n**Example**: Convert $29_{10}$ to Binary:\n* $29 \\div 2 = 14$ R $1$ (LSB)\n* $14 \\div 2 = 7$ R $0$\n* $7 \\div 2 = 3$ R $1$\n* $3 \\div 2 = 1$ R $1$\n* $1 \\div 2 = 0$ R $1$ (MSB)\n* **Result:** $11101_2$\n\n#### 2. Direct 4-Bit & 3-Bit Grouping (Power of Two Shortcut)\nWhen converting between Binary and Hex/Octal, skip decimal conversion by grouping bits from the radix point:\n* **Binary to Hex:** Group into **4-bit nibbles** ($1101\\;1010_2 = \\text{DA}_{16}$).\n* **Binary to Octal:** Group into **3-bit triplets** ($110\\;110_2 = 66_8$).",
+          "action_link": {
+            "type": "converter",
+            "label": "Try Direct Nibble Grouping in Converter",
+            "payload": "11011010.101",
+            "mode": "2"
+          },
+          "quiz": [
+            {
+              "question": "What is the binary equivalent of Hexadecimal 7F₁₆ using 4-bit nibble grouping?",
+              "options": ["0111 1111", "1110 1111", "0011 1111", "0111 1110"],
+              "correct_index": 0,
+              "explanation": "7 is 0111₂ and F is 1111₂, so 7F₁₆ = 0111 1111₂."
+            }
+          ]
+        },
+        {
+          "id": "digital_codes",
+          "title": "Digital Codes: BCD, Gray Code & Aiken 2421",
+          "summary": "Self-complementing codes, unit distance Gray encodings, and BCD pseudotetrad detection.",
+          "read_time_minutes": 5,
+          "difficulty": "Intermediate",
+          "tags": ["BCD 8421", "Gray Code", "Excess-3", "Aiken 2421"],
+          "content_markdown": "### Specialized Binary Encodings\n\n#### 1. Binary-Coded Decimal (BCD 8421)\nEncodes each decimal digit ($0..9$) into an independent 4-bit nibble.\n* Values $1010_2$ through $1111_2$ are **invalid pseudotetrads** in standard 8421 BCD.\n\n#### 2. Gray Code (Unit Distance / Reflected Binary)\nAdjacent numerical values differ by **only 1 single bit transition**, eliminating mechanical glitching in rotary shaft encoders and Karnaugh map headers.\n\n* **Binary to Gray Conversion:**\n  * $G_n = B_n$\n  * $G_i = B_{i+1} \\oplus B_i$\n\n#### 3. Excess-3 (Biased +3) & Aiken 2421\n* **Excess-3:** $\\text{Digit} + 3$. It is **self-complementing**, meaning its 1's complement directly yields the 9's complement of the decimal digit!\n* **Aiken 2421:** Weighted self-complementing code using weights $2, 4, 2, 1$.",
+          "action_link": {
+            "type": "converter",
+            "label": "Open Digital Codes Converter",
+            "payload": "42",
+            "mode": "10"
+          },
+          "quiz": [
+            {
+              "question": "Why is Gray Code preferred in mechanical rotary encoders?",
+              "options": [
+                "Only 1 bit changes at a time, preventing transition race glitches",
+                "It uses fewer wires than standard binary",
+                "It can store negative numbers without signs",
+                "It allows direct multiplication by 3"
+              ],
+              "correct_index": 0,
+              "explanation": "Because only a single bit changes between adjacent values, asynchronous mechanical sensor bounce cannot produce invalid intermediate states."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "binary_arithmetic",
+      "title": "Binary Arithmetic & Machine Algorithms",
+      "description": "Explore carries, 2's complement overflows, Booth multiplication, division, and error correction.",
+      "icon": "calculate",
+      "color": "0xFFFF9800",
+      "lessons": [
+        {
+          "id": "binary_addition_subtraction",
+          "title": "Binary Addition, Carries & 2's Complement",
+          "summary": "Full adder math, carry cascade propagation, and two's complement sign-magnitude subtraction.",
+          "read_time_minutes": 5,
+          "difficulty": "Beginner",
+          "tags": ["Addition", "Subtraction", "2's Complement", "Overflow"],
+          "content_markdown": "### Binary Arithmetic Rules\n\n#### 1. Binary Addition Truth Table\n* $0 + 0 = 0$\n* $0 + 1 = 1$\n* $1 + 0 = 1$\n* $1 + 1 = 0$ (Carry $1$)\n* $1 + 1 + 1 = 1$ (Carry $1$)\n\n#### 2. Two's Complement Subtraction ($A - B$)\nComputers perform subtraction using addition:\n$$A - B = A + (\\sim B + 1)$$\n1. Invert all bits of subtrahend $B$ (One's complement).\n2. Add $1$ (Two's complement).\n3. Add to $A$.\n\n#### 3. Signed Overflow Rule ($V$)\nAn overflow occurs if two operands with the same sign produce a result with the opposite sign:\n$$V = C_{\\text{in}} \\oplus C_{\\text{out}}$$",
+          "action_link": {
+            "type": "workout",
+            "label": "Practice Column Addition & Carries",
+            "payload": "185 + 47",
+            "mode": "column"
+          },
+          "quiz": [
+            {
+              "question": "What is the 8-bit Two's Complement representation of -5?",
+              "options": ["1111 1011", "1000 0101", "1111 1010", "1111 1101"],
+              "correct_index": 0,
+              "explanation": "+5 is 0000 0101. Inverting bits gives 1111 1010. Adding 1 yields 1111 1011."
+            }
+          ]
+        },
+        {
+          "id": "booth_multiplication",
+          "title": "Hardware Booth Multiplication",
+          "summary": "Signed binary multiplication using bit-pair recoding and arithmetic right shifts.",
+          "read_time_minutes": 6,
+          "difficulty": "Advanced",
+          "tags": ["Booth's Algorithm", "ALU", "Multiplication", "SAR"],
+          "content_markdown": "### Booth's Multiplication Algorithm\n\nBooth's algorithm efficiently multiplies signed 2's complement integers by treating contiguous blocks of 1s as a single subtraction and addition:\n\n$$\\dots 011110 \\dots = 2^{k+n} - 2^k$$\n\n#### Algorithm Flow:\n1. Initialize Register $A = 0$, $Q = \\text{Multiplier}$, $Q_{-1} = 0$, $M = \\text{Multiplicand}$.\n2. Inspect the two least significant bits $(Q_0, Q_{-1})$:\n   * **$10$**: $A = A - M$, then Arithmetic Shift Right $(\\text{SAR}) [A, Q, Q_{-1}]$.\n   * **$01$**: $A = A + M$, then Arithmetic Shift Right $(\\text{SAR}) [A, Q, Q_{-1}]$.\n   * **$00$ or $11$**: Arithmetic Shift Right $(\\text{SAR}) [A, Q, Q_{-1}]$.\n3. Repeat for $N$ bit cycles. Final product is concatenated in $[A, Q]$.",
+          "action_link": {
+            "type": "arithmetic",
+            "label": "Simulate 7 × -3 in Booth ALU",
+            "payload": "7 * -3",
+            "mode": "booth"
+          },
+          "quiz": [
+            {
+              "question": "What action does Booth's algorithm perform when inspecting bit-pair (Q₀, Q₋₁) = 10?",
+              "options": [
+                "Subtract M from A (A = A - M), then SAR",
+                "Add M to A (A = A + M), then SAR",
+                "Only shift without arithmetic",
+                "Reset register Q to zero"
+              ],
+              "correct_index": 0,
+              "explanation": "Pattern 10 indicates the start of a block of 1s, requiring A = A - M before shifting."
+            }
+          ]
+        },
+        {
+          "id": "hamming_code",
+          "title": "Hamming Code (7,4) & (8,4) SEC-DED",
+          "summary": "Single error correction and double error detection with parity generator matrices.",
+          "read_time_minutes": 6,
+          "difficulty": "Advanced",
+          "tags": ["Hamming (7,4)", "SEC-DED", "Syndrome", "Error Correction"],
+          "content_markdown": "### Hamming Error Correcting Codes\n\nHamming codes embed parity check bits at power-of-2 bit positions ($P_1=1, P_2=2, P_4=4, P_8=8$) into data bits ($D_3, D_5, D_6, D_7$):\n\n$$\\text{Codeword} = [P_1, P_2, D_3, P_4, D_5, D_6, D_7]$$\n\n#### Parity Coverage Equations (Even Parity):\n* $P_1 = D_3 \\oplus D_5 \\oplus D_7$\n* $P_2 = D_3 \\oplus D_6 \\oplus D_7$\n* $P_4 = D_5 \\oplus D_6 \\oplus D_7$\n\n#### Syndrome Decoding:\nCalculate syndrome vector $S = [s_3, s_2, s_1]$. If $S = 0$, no error occurred. If $S \\neq 0$, the binary value of $S$ points directly to the erroneous bit index, which is flipped to correct the error!",
+          "action_link": {
+            "type": "arithmetic",
+            "label": "Test Hamming (7,4) in Error Engine",
+            "payload": "1011",
+            "mode": "hamming"
+          },
+          "quiz": [
+            {
+              "question": "If a Hamming (7,4) decoder computes syndrome vector S = [1, 0, 1] (binary 5), which bit is erroneous?",
+              "options": ["Bit 5 (D₂)", "Bit 1 (P₁)", "Bit 7 (D₄)", "No error occurred"],
+              "correct_index": 0,
+              "explanation": "Syndrome 101₂ = 5 in decimal, identifying bit index 5 as the flipped bit."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "boolean_minimization",
+      "title": "Boolean Algebra & Minimization",
+      "description": "Learn Boolean algebra axioms, De Morgan laws, Karnaugh maps, and Quine-McCluskey.",
+      "icon": "alt_route",
+      "color": "0xFF9C27B0",
+      "lessons": [
+        {
+          "id": "boolean_laws",
+          "title": "Boolean Laws & De Morgan's Theorems",
+          "summary": "Master identity, absorption, involution, and De Morgan algebraic transformations.",
+          "read_time_minutes": 5,
+          "difficulty": "Beginner",
+          "tags": ["De Morgan", "Involution", "Boolean Algebra", "Axioms"],
+          "content_markdown": "### Fundamental Boolean Theorems\n\n#### 1. Fundamental Laws:\n* **Identity:** $A \\cdot 1 = A,\\quad A + 0 = A$\n* **Annihilator:** $A \\cdot 0 = 0,\\quad A + 1 = 1$\n* **Idempotence:** $A \\cdot A = A,\\quad A + A = A$\n* **Complement:** $A \\cdot \\overline{A} = 0,\\quad A + \\overline{A} = 1$\n* **Absorption:** $A + (A \\cdot B) = A$\n* **Involution (Double Negation):** $\\overline{\\overline{A}} = A$\n\n#### 2. De Morgan's Theorems:\n$$\\overline{A \\cdot B} = \\overline{A} + \\overline{B}$$\n$$\\overline{A + B} = \\overline{A} \\cdot \\overline{B}$$\n\nDe Morgan's theorem states that inverting the result of an AND/OR operation is mathematically equivalent to applying the dual operator to individually inverted inputs.",
+          "action_link": {
+            "type": "boolean",
+            "label": "Analyze De Morgan Theorem in Solver",
+            "payload": "!(A & B)",
+            "mode": "standard"
+          },
+          "quiz": [
+            {
+              "question": "What is the De Morgan equivalent of !(A + B)?",
+              "options": ["!A & !B", "!A | !B", "A & B", "!(A & B)"],
+              "correct_index": 0,
+              "explanation": "!(A + B) transforms the OR into AND with each literal inverted: !A & !B."
+            }
+          ]
+        },
+        {
+          "id": "karnaugh_maps",
+          "title": "Karnaugh Map Minimization (2 to 4 Vars)",
+          "summary": "Visual grouping of adjacent 1s and 0s in Gray-code planar and toroidal grids.",
+          "read_time_minutes": 6,
+          "difficulty": "Intermediate",
+          "tags": ["K-Map", "Gray Code", "Prime Implicants", "SOP"],
+          "content_markdown": "### Karnaugh Map Minimization\n\nA **Karnaugh Map (K-Map)** arranges minterms in a multidimensional Gray-code grid so that adjacent cells differ by only one boolean literal.\n\n#### Grouping Rules:\n1. Groups must contain a power of two cells ($1, 2, 4, 8, 16$).\n2. Groups must be rectangular.\n3. Wrap-around edges are adjacent (toroidal topology: column 0 wraps to column 3, row 0 wraps to row 3).\n4. Essential Prime Implicants (EPIs) contain at least one minterm not covered by any other group.\n5. Don't-Care cells ($X$) can be treated as $1$ to form larger groups or $0$ to avoid redundant terms.",
+          "action_link": {
+            "type": "boolean",
+            "label": "Solve 4-Variable K-Map in BaseLogic",
+            "payload": "(A & B) | (A & C) | (B & C)",
+            "mode": "kmap"
+          },
+          "quiz": [
+            {
+              "question": "How many literals are eliminated when grouping 4 adjacent cells in a 4-variable K-Map?",
+              "options": ["2 literals", "1 literal", "3 literals", "4 literals"],
+              "correct_index": 0,
+              "explanation": "A group of size 2ᵏ eliminates k variables. For group size 4 = 2², exactly 2 literals are eliminated."
+            }
+          ]
+        },
+        {
+          "id": "quine_mccluskey",
+          "title": "Quine-McCluskey Tabular Reduction",
+          "summary": "Exact tabular minimization for up to 6 variables using Petrick's branch & bound cover.",
+          "read_time_minutes": 6,
+          "difficulty": "Advanced",
+          "tags": ["Quine-McCluskey", "EPI", "Petrick's Method", "Tabular"],
+          "content_markdown": "### Quine-McCluskey Method\n\nFor complex functions with 4 to 6+ variables, the **Quine-McCluskey (QM)** algorithm provides exact, automated tabular minimization:\n\n#### Step-by-Step Algorithm:\n1. **Hamming Weight Partitioning:** Group minterms by count of 1-bits.\n2. **Systematic Column Merging:** Compare terms between adjacent groups differing in exactly one position, replacing varying bits with dashes (`-`).\n3. **Prime Implicant Table:** Unmerged terms form Prime Implicants (PIs).\n4. **Essential PI Extraction:** Identify columns covered by only one PI.\n5. **Branch & Bound Set Cover:** Find the minimal term and minimal literal solution for remaining minterms.",
+          "action_link": {
+            "type": "boolean",
+            "label": "Run Quine-McCluskey on Full Adder Carry",
+            "payload": "(A & B) | (Cin & (A ^ B))",
+            "mode": "qm"
+          },
+          "quiz": [
+            {
+              "question": "What is an Essential Prime Implicant (EPI) in a Quine-McCluskey coverage table?",
+              "options": [
+                "A Prime Implicant that is the sole cover for at least one minterm column",
+                "A Prime Implicant with no don't-cares",
+                "The largest group in the table",
+                "A term that covers all minterms simultaneously"
+              ],
+              "correct_index": 0,
+              "explanation": "An EPI is mandatory because at least one minterm cannot be covered by any other prime implicant."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "digital_circuits",
+      "title": "Digital Circuits & Universal Synthesis",
+      "description": "Construct schematic diagrams, tied-input universal gates, and sequential state machines.",
+      "icon": "cable",
+      "color": "0xFF009688",
+      "lessons": [
+        {
+          "id": "universal_gate_synthesis",
+          "title": "Universal Logic Gate Synthesis (NAND/NOR)",
+          "summary": "Synthesize arbitrary multi-output digital circuits using only NAND or only NOR gates.",
+          "read_time_minutes": 6,
+          "difficulty": "Intermediate",
+          "tags": ["NAND-Only", "NOR-Only", "Tied-Input Inverter", "De Morgan"],
+          "content_markdown": "### Universal Logic Gates\n\nNAND and NOR gates are classified as **universal logic gates** because any Boolean function can be implemented using exclusively one gate type.\n\n#### 1. Inverter Realization (Tied-Input Gate)\nTo form a NOT inverter using only a universal gate, tie all inputs together:\n* **NAND Inverter:** $\\overline{A \\cdot A} = \\overline{A}$\n* **NOR Inverter:** $\\overline{A + A} = \\overline{A}$\n\n#### 2. Two-Level Transformation Proof:\n* **NAND-NAND from SOP:** Apply involution and De Morgan to flat SOP:\n  $$F = AB + CD = \\overline{\\overline{AB + CD}} = \\overline{\\overline{AB} \\cdot \\overline{CD}}$$\n* **NOR-NOR from POS:** Apply involution and De Morgan to flat POS:\n  $$F = (A+B)(C+D) = \\overline{\\overline{(A+B)(C+D)}} = \\overline{\\overline{A+B} + \\overline{C+D}}$$\n\n#### 3. Strict Hardware Rules:\nXOR and XNOR gates are primary logic gates strictly designed to accept only **two binary inputs** and produce one output.",
+          "action_link": {
+            "type": "circuit",
+            "label": "Synthesize NAND Full Adder in Circuit Designer",
+            "payload": "Sum = A ^ B ^ Cin; Cout = (A & B) | (Cin & (A ^ B))",
+            "mode": "nand"
+          },
+          "quiz": [
+            {
+              "question": "How is an inverter formed using a 2-input NOR gate?",
+              "options": [
+                "Tie both inputs together to the input signal (A + A)' = A'",
+                "Connect one input to Ground (0)",
+                "Connect one input to VCC (1)",
+                "NOR gates cannot function as inverters"
+              ],
+              "correct_index": 0,
+              "explanation": "Connecting both inputs together yields (A + A)' = A', realizing a clean NOT gate."
+            }
+          ]
+        },
+        {
+          "id": "sequential_logic",
+          "title": "Sequential Logic, Flip-Flops & Counters",
+          "summary": "Edge-triggered clocking, D/JK/T Flip-Flops, and 4-Bit ripple binary counters.",
+          "read_time_minutes": 6,
+          "difficulty": "Advanced",
+          "tags": ["D Flip-Flop", "JK Flip-Flop", "Clock", "Ripple Counter"],
+          "content_markdown": "### Sequential Logic Circuits\n\nUnlike combinational logic (where outputs depend solely on present inputs), **sequential logic** incorporates memory feedback governed by a periodic clock signal.\n\n#### Flip-Flop Types:\n* **D Flip-Flop (Data):** Captures input $D$ on the active clock edge: $Q_{\\text{next}} = D$.\n* **T Flip-Flop (Toggle):** Toggles state when $T = 1$: $Q_{\\text{next}} = T \\oplus Q$.\n* **JK Flip-Flop:** Universal sequential element ($J=1, K=0 \\rightarrow \\text{Set}$; $J=0, K=1 \\rightarrow \\text{Reset}$; $J=1, K=1 \\rightarrow \\text{Toggle}$).\n\n#### Asynchronous Ripple Counters:\nChaining $N$ toggle flip-flops in series where $Q_i$ clocks the next stage creates an $N$-bit binary divider ($2^N$ states).",
+          "action_link": {
+            "type": "circuit",
+            "label": "Open Flip-Flop Counter in Designer",
+            "payload": "Full Adder",
+            "mode": "standard"
+          },
+          "quiz": [
+            {
+              "question": "What is the next state Qₙₑₓₜ of a JK Flip-Flop when both J = 1 and K = 1 on a clock pulse?",
+              "options": ["Toggle (Q' or not Q)", "Set to 1", "Reset to 0", "Undefined / Race Condition"],
+              "correct_index": 0,
+              "explanation": "When J = 1 and K = 1, the JK flip-flop toggles its output state on every active clock edge."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
