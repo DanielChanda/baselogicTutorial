@@ -127,20 +127,63 @@
             "mode": "10"
           },
           "quiz": [
-            {
-              "question": "Why is Gray Code preferred in mechanical rotary encoders?",
-              "options": [
-                "Only 1 bit changes at a time, preventing transition race glitches",
-                "It uses fewer wires than standard binary",
-                "It can store negative numbers without signs",
-                "It allows direct multiplication by 3"
-              ],
-              "correct_index": 0,
-              "explanation": "Because only a single bit changes between adjacent values, asynchronous mechanical sensor bounce cannot produce invalid intermediate states."
-            }
-          ]
-        }
-      ]
+  {
+    "question": "Why is Gray Code preferred in mechanical rotary encoders?",
+    "options": [
+      "Only 1 bit changes at a time, preventing transition race glitches",
+      "It uses fewer wires than standard binary",
+      "It can store negative numbers without signs",
+      "It allows direct multiplication by 3"
+    ],
+    "correct_index": 0,
+    "explanation": "Because only a single bit changes between adjacent values, asynchronous mechanical sensor bounce cannot produce invalid intermediate states."
+  },
+  {
+    "question": "Which of the following 4-bit patterns is an invalid pseudotetrad in BCD 8421?",
+    "options": [
+      "0111₂",
+      "1001₂",
+      "1100₂",
+      "0000₂"
+    ],
+    "correct_index": 2,
+    "explanation": "Standard 8421 BCD only encodes decimal digits 0–9 (0000₂ to 1001₂). Patterns from 1010₂ (10) through 1111₂ (15) are invalid pseudotetrads."
+  },
+  {
+    "question": "What is the Excess-3 code representation for the decimal digit 5?",
+    "options": [
+      "0101₂",
+      "1000₂",
+      "0011₂",
+      "0110₂"
+    ],
+    "correct_index": 1,
+    "explanation": "Excess-3 adds 3 to the decimal digit before encoding into binary: 5 + 3 = 8, which is 1000₂."
+  },
+  {
+    "question": "What mathematical property makes Excess-3 and Aiken 2421 codes 'self-complementing'?",
+    "options": [
+      "Their 1's complement directly yields the 9's complement of the decimal digit",
+      "They can only represent even numbers",
+      "They invert the sign bit for negative numbers automatically",
+      "Their 2's complement equals zero"
+    ],
+    "correct_index": 0,
+    "explanation": "In a self-complementing code, inverting every bit (1's complement) produces the exact encoding for (9 − digit), which is the 9's complement."
+  },
+  {
+    "question": "Given binary 1100₂, what is its equivalent 4-bit Gray Code representation?",
+    "options": [
+      "1010₂",
+      "1110₂",
+      "1000₂",
+      "0110₂"
+    ],
+    "correct_index": 0,
+    "explanation": "G₃ = B₃ = 1; G₂ = B₃ ⊕ B₂ = 1 ⊕ 1 = 0; G₁ = B₂ ⊕ B₁ = 1 ⊕ 0 = 1; G₀ = B₁ ⊕ B₀ = 0 ⊕ 0 = 0. Thus, the Gray Code is 1010₂."
+  }
+]
+
     },
     {
       "id": "binary_arithmetic",
