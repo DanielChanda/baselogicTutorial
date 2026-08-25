@@ -79,13 +79,38 @@
             "mode": "2"
           },
           "quiz": [
-            {
-              "question": "What is the binary equivalent of Hexadecimal 7F₁₆ using 4-bit nibble grouping?",
-              "options": ["0111 1111", "1110 1111", "0011 1111", "0111 1110"],
-              "correct_index": 0,
-              "explanation": "7 is 0111₂ and F is 1111₂, so 7F₁₆ = 0111 1111₂."
-            }
-          ]
+  {
+    "question": "What is the binary equivalent of Hexadecimal 7F₁₆ using 4-bit nibble grouping?",
+    "options": ["0111 1111", "1110 1111", "0011 1111", "0111 1110"],
+    "correct_index": 0,
+    "explanation": "7 is 0111₂ and F is 1111₂, so 7F₁₆ = 0111 1111₂."
+  },
+  {
+    "question": "What is the octal equivalent of the binary number 110110₂ using 3-bit triplet grouping?",
+    "options": ["56₈", "66₈", "76₈", "46₈"],
+    "correct_index": 1,
+    "explanation": "Grouping the binary bits into 3-bit triplets gives 110₂ = 6 and 110₂ = 6, resulting in 66₈."
+  },
+  {
+    "question": "What is the remainder of 29 divided by 2 during the first step of converting 29₁₀ to binary via repeated division?",
+    "options": ["0", "1", "2", "14"],
+    "correct_index": 1,
+    "explanation": "29 ÷ 2 = 14 with a remainder of 1, which represents the Least Significant Bit (LSB)."
+  },
+  {
+    "question": "When converting a binary number to octal, how many bits are grouped together into each triplet?",
+    "options": ["2 bits", "3 bits", "4 bits", "8 bits"],
+    "correct_index": 1,
+    "explanation": "Since 2³ = 8, binary digits are grouped into 3-bit chunks from the radix point."
+  },
+  {
+    "question": "What is the hexadecimal equivalent of the binary number 1101 1010₂ using 4-bit nibble grouping?",
+    "options": ["CA₁₆", "DA₁₆", "EA₁₆", "FA₁₆"],
+    "correct_index": 1,
+    "explanation": "1101₂ equals 13 (D) and 1010₂ equals 10 (A), yielding DA₁₆."
+  }
+]
+
         },
         {
           "id": "digital_codes",
