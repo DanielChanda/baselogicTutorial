@@ -1,6 +1,6 @@
 {
-  "version": "2.0.0",
-  "last_updated": "2026-08-25T16:00:00Z",
+  "version": "2.0.1",
+  "last_updated": "2026-08-25T17:30:00Z",
   "tracks": [
     {
       "id": "number_systems",
@@ -16,7 +16,7 @@
           "read_time_minutes": 4,
           "difficulty": "Beginner",
           "tags": ["Base 2", "Base 10", "Base 16", "Radix"],
-          "content_markdown": "### Positional Number Systems\n\nA **number system** represents values using distinct digits weighted by powers of their base (radix $r$):\n\n$$\\text{Value} = \\sum_{i=-m}^{n-1} d_i \\cdot r^i$$\n\n#### Primary Radices in Computer Science:\n* **Binary (Base 2)**: Digits $\\{0, 1\\}$. Fundamental for digital transistor logic.\n* **Octal (Base 8)**: Digits $\\{0..7\\}$. Compact representation grouping 3 binary bits.\n* **Decimal (Base 10)**: Digits $\\{0..9\\}$. Standard human decimal system.\n* **Hexadecimal (Base 16)**: Digits $\\{0..9, A..F\\}$. Standard for memory addresses, grouping 4 binary bits (1 nibble).\n\n#### Comparative Value Mappings:\n| Decimal | Binary | Octal | Hex |\n|:---:|:---:|:---:|:---:|\n| 0 | 0000 | 0 | 0 |\n| 5 | 0101 | 5 | 5 |\n| 10 | 1010 | 12 | A |\n| 15 | 1111 | 17 | F |\n| 16 | 0001 0000 | 20 | 10 |",
+          "content_markdown": "### Positional Number Systems\n\nA **number system** represents numerical values using distinct digits weighted by positional powers of their base (radix `r`):\n\n> 📐 **General Positional Formula:**\n> `Value = (dₙ₋₁ · rⁿ⁻¹) + ... + (d₁ · r¹) + (d₀ · r⁰) + (d₋₁ · r⁻¹) + ... + (d₋ₘ · r⁻ᵐ)`\n\n#### Primary Radices in Computer Science:\n* **Binary (Base 2)**: Digits `{0, 1}`. The fundamental alphabet of digital transistor logic.\n* **Octal (Base 8)**: Digits `{0..7}`. Compact representation grouping 3 binary bits.\n* **Decimal (Base 10)**: Digits `{0..9}`. Standard human positional system.\n* **Hexadecimal (Base 16)**: Digits `{0..9, A..F}`. Primary system for memory addresses, grouping 4 binary bits (1 nibble).\n\n#### Comparative Radix Values:\n| Decimal | Binary (Base 2) | Octal (Base 8) | Hex (Base 16) |\n|:---:|:---:|:---:|:---:|\n| 0 | 0000 | 0 | 0 |\n| 5 | 0101 | 5 | 5 |\n| 10 | 1010 | 12 | A |\n| 15 | 1111 | 17 | F |\n| 16 | 0001 0000 | 20 | 10 |",
           "action_link": {
             "type": "converter",
             "label": "Convert 255 in Base Converter",
@@ -47,7 +47,7 @@
           "read_time_minutes": 6,
           "difficulty": "Beginner",
           "tags": ["Division Method", "Bit Grouping", "Fractional Conversion"],
-          "content_markdown": "### Conversion Methods\n\n#### 1. Decimal to Any Base (Repeated Division)\nDivide the decimal integer repeatedly by base $r$ and collect remainders from **bottom to top** (MSB to LSB):\n\n**Example**: Convert $29_{10}$ to Binary:\n* $29 \\div 2 = 14$ R $1$ (LSB)\n* $14 \\div 2 = 7$ R $0$\n* $7 \\div 2 = 3$ R $1$\n* $3 \\div 2 = 1$ R $1$\n* $1 \\div 2 = 0$ R $1$ (MSB)\n* **Result:** $11101_2$\n\n#### 2. Direct 4-Bit & 3-Bit Grouping (Power of Two Shortcut)\nWhen converting between Binary and Hex/Octal, skip decimal conversion by grouping bits from the radix point:\n* **Binary to Hex:** Group into **4-bit nibbles** ($1101\\;1010_2 = \\text{DA}_{16}$).\n* **Binary to Octal:** Group into **3-bit triplets** ($110\\;110_2 = 66_8$).",
+          "content_markdown": "### Conversion Methods\n\n#### 1. Decimal to Any Base (Repeated Division)\nDivide the decimal integer repeatedly by base `r` and collect remainders from **bottom to top** (MSB to LSB):\n\n**Example**: Convert 29₁₀ to Binary:\n* `29 ÷ 2 = 14` Remainder **1** (LSB)\n* `14 ÷ 2 = 7` Remainder **0**\n* `7 ÷ 2 = 3` Remainder **1**\n* `3 ÷ 2 = 1` Remainder **1**\n* `1 ÷ 2 = 0` Remainder **1** (MSB)\n* **Result:** `11101₂`\n\n#### 2. Direct 4-Bit & 3-Bit Grouping (Power of Two Shortcut)\nWhen converting between Binary and Hex/Octal, skip decimal conversion by grouping bits from the radix point:\n* **Binary to Hex:** Group into **4-bit nibbles** (`1101 1010₂ = DA₁₆`).\n* **Binary to Octal:** Group into **3-bit triplets** (`110 110₂ = 66₈`).",
           "action_link": {
             "type": "converter",
             "label": "Try Direct Nibble Grouping in Converter",
@@ -70,7 +70,7 @@
           "read_time_minutes": 5,
           "difficulty": "Intermediate",
           "tags": ["BCD 8421", "Gray Code", "Excess-3", "Aiken 2421"],
-          "content_markdown": "### Specialized Binary Encodings\n\n#### 1. Binary-Coded Decimal (BCD 8421)\nEncodes each decimal digit ($0..9$) into an independent 4-bit nibble.\n* Values $1010_2$ through $1111_2$ are **invalid pseudotetrads** in standard 8421 BCD.\n\n#### 2. Gray Code (Unit Distance / Reflected Binary)\nAdjacent numerical values differ by **only 1 single bit transition**, eliminating mechanical glitching in rotary shaft encoders and Karnaugh map headers.\n\n* **Binary to Gray Conversion:**\n  * $G_n = B_n$\n  * $G_i = B_{i+1} \\oplus B_i$\n\n#### 3. Excess-3 (Biased +3) & Aiken 2421\n* **Excess-3:** $\\text{Digit} + 3$. It is **self-complementing**, meaning its 1's complement directly yields the 9's complement of the decimal digit!\n* **Aiken 2421:** Weighted self-complementing code using weights $2, 4, 2, 1$.",
+          "content_markdown": "### Specialized Binary Encodings\n\n#### 1. Binary-Coded Decimal (BCD 8421)\nEncodes each decimal digit (`0..9`) into an independent 4-bit nibble.\n* Values `1010₂` through `1111₂` are **invalid pseudotetrads** in standard 8421 BCD.\n\n#### 2. Gray Code (Unit Distance / Reflected Binary)\nAdjacent numerical values differ by **only 1 single bit transition**, eliminating mechanical glitching in rotary shaft encoders and Karnaugh map headers.\n\n* **Binary to Gray Conversion:**\n  * `Gₙ = Bₙ`\n  * `Gᵢ = Bᵢ₊₁ ⊕ Bᵢ`\n\n#### 3. Excess-3 (Biased +3) & Aiken 2421\n* **Excess-3:** `Digit + 3`. It is **self-complementing**, meaning its 1's complement directly yields the 9's complement of the decimal digit!\n* **Aiken 2421:** Weighted self-complementing code using weights `2, 4, 2, 1`.",
           "action_link": {
             "type": "converter",
             "label": "Open Digital Codes Converter",
@@ -107,7 +107,7 @@
           "read_time_minutes": 5,
           "difficulty": "Beginner",
           "tags": ["Addition", "Subtraction", "2's Complement", "Overflow"],
-          "content_markdown": "### Binary Arithmetic Rules\n\n#### 1. Binary Addition Truth Table\n* $0 + 0 = 0$\n* $0 + 1 = 1$\n* $1 + 0 = 1$\n* $1 + 1 = 0$ (Carry $1$)\n* $1 + 1 + 1 = 1$ (Carry $1$)\n\n#### 2. Two's Complement Subtraction ($A - B$)\nComputers perform subtraction using addition:\n$$A - B = A + (\\sim B + 1)$$\n1. Invert all bits of subtrahend $B$ (One's complement).\n2. Add $1$ (Two's complement).\n3. Add to $A$.\n\n#### 3. Signed Overflow Rule ($V$)\nAn overflow occurs if two operands with the same sign produce a result with the opposite sign:\n$$V = C_{\\text{in}} \\oplus C_{\\text{out}}$$",
+          "content_markdown": "### Binary Arithmetic Rules\n\n#### 1. Binary Addition Truth Table\n* `0 + 0 = 0`\n* `0 + 1 = 1`\n* `1 + 0 = 1`\n* `1 + 1 = 0` (Carry 1)\n* `1 + 1 + 1 = 1` (Carry 1)\n\n#### 2. Two's Complement Subtraction (A - B)\nComputers perform subtraction using addition:\n> 📐 `A - B = A + (~B + 1)`\n1. Invert all bits of subtrahend B (One's complement).\n2. Add 1 (Two's complement).\n3. Add to A.\n\n#### 3. Signed Overflow Rule (V)\nAn overflow occurs if two operands with the same sign produce a result with the opposite sign:\n> 📐 `V = Cin ⊕ Cout`",
           "action_link": {
             "type": "workout",
             "label": "Practice Column Addition & Carries",
@@ -130,7 +130,7 @@
           "read_time_minutes": 6,
           "difficulty": "Advanced",
           "tags": ["Booth's Algorithm", "ALU", "Multiplication", "SAR"],
-          "content_markdown": "### Booth's Multiplication Algorithm\n\nBooth's algorithm efficiently multiplies signed 2's complement integers by treating contiguous blocks of 1s as a single subtraction and addition:\n\n$$\\dots 011110 \\dots = 2^{k+n} - 2^k$$\n\n#### Algorithm Flow:\n1. Initialize Register $A = 0$, $Q = \\text{Multiplier}$, $Q_{-1} = 0$, $M = \\text{Multiplicand}$.\n2. Inspect the two least significant bits $(Q_0, Q_{-1})$:\n   * **$10$**: $A = A - M$, then Arithmetic Shift Right $(\\text{SAR}) [A, Q, Q_{-1}]$.\n   * **$01$**: $A = A + M$, then Arithmetic Shift Right $(\\text{SAR}) [A, Q, Q_{-1}]$.\n   * **$00$ or $11$**: Arithmetic Shift Right $(\\text{SAR}) [A, Q, Q_{-1}]$.\n3. Repeat for $N$ bit cycles. Final product is concatenated in $[A, Q]$.",
+          "content_markdown": "### Booth's Multiplication Algorithm\n\nBooth's algorithm efficiently multiplies signed 2's complement integers by treating contiguous blocks of 1s as a single subtraction and addition:\n\n> 📐 `...011110... = 2ᵏ⁺ⁿ - 2ᵏ`\n\n#### Algorithm Flow:\n1. Initialize Register `A = 0`, `Q = Multiplier`, `Q₋₁ = 0`, `M = Multiplicand`.\n2. Inspect the two least significant bits `(Q₀, Q₋₁)`:\n   * **`10`**: `A = A - M`, then Arithmetic Shift Right (SAR) `[A, Q, Q₋₁]`.\n   * **`01`**: `A = A + M`, then Arithmetic Shift Right (SAR) `[A, Q, Q₋₁]`.\n   * **`00` or `11`**: Arithmetic Shift Right (SAR) `[A, Q, Q₋₁]`.\n3. Repeat for N bit cycles. Final product is concatenated in `[A, Q]`.",
           "action_link": {
             "type": "arithmetic",
             "label": "Simulate 7 × -3 in Booth ALU",
@@ -158,7 +158,7 @@
           "read_time_minutes": 6,
           "difficulty": "Advanced",
           "tags": ["Hamming (7,4)", "SEC-DED", "Syndrome", "Error Correction"],
-          "content_markdown": "### Hamming Error Correcting Codes\n\nHamming codes embed parity check bits at power-of-2 bit positions ($P_1=1, P_2=2, P_4=4, P_8=8$) into data bits ($D_3, D_5, D_6, D_7$):\n\n$$\\text{Codeword} = [P_1, P_2, D_3, P_4, D_5, D_6, D_7]$$\n\n#### Parity Coverage Equations (Even Parity):\n* $P_1 = D_3 \\oplus D_5 \\oplus D_7$\n* $P_2 = D_3 \\oplus D_6 \\oplus D_7$\n* $P_4 = D_5 \\oplus D_6 \\oplus D_7$\n\n#### Syndrome Decoding:\nCalculate syndrome vector $S = [s_3, s_2, s_1]$. If $S = 0$, no error occurred. If $S \\neq 0$, the binary value of $S$ points directly to the erroneous bit index, which is flipped to correct the error!",
+          "content_markdown": "### Hamming Error Correcting Codes\n\nHamming codes embed parity check bits at power-of-2 bit positions (`P₁=1, P₂=2, P₄=4, P₈=8`) into data bits (`D₃, D₅, D₆, D₇`):\n\n> 📐 **Codeword Structure:** `[P₁, P₂, D₃, P₄, D₅, D₆, D₇]`\n\n#### Parity Coverage Equations (Even Parity):\n* `P₁ = D₃ ⊕ D₅ ⊕ D₇`\n* `P₂ = D₃ ⊕ D₆ ⊕ D₇`\n* `P₄ = D₅ ⊕ D₆ ⊕ D₇`\n\n#### Syndrome Decoding:\nCalculate syndrome vector `S = [s₃, s₂, s₁]`. If `S = 0`, no error occurred. If `S ≠ 0`, the binary value of `S` points directly to the erroneous bit index, which is flipped to correct the error!",
           "action_link": {
             "type": "arithmetic",
             "label": "Test Hamming (7,4) in Error Engine",
@@ -190,7 +190,7 @@
           "read_time_minutes": 5,
           "difficulty": "Beginner",
           "tags": ["De Morgan", "Involution", "Boolean Algebra", "Axioms"],
-          "content_markdown": "### Fundamental Boolean Theorems\n\n#### 1. Fundamental Laws:\n* **Identity:** $A \\cdot 1 = A,\\quad A + 0 = A$\n* **Annihilator:** $A \\cdot 0 = 0,\\quad A + 1 = 1$\n* **Idempotence:** $A \\cdot A = A,\\quad A + A = A$\n* **Complement:** $A \\cdot \\overline{A} = 0,\\quad A + \\overline{A} = 1$\n* **Absorption:** $A + (A \\cdot B) = A$\n* **Involution (Double Negation):** $\\overline{\\overline{A}} = A$\n\n#### 2. De Morgan's Theorems:\n$$\\overline{A \\cdot B} = \\overline{A} + \\overline{B}$$\n$$\\overline{A + B} = \\overline{A} \\cdot \\overline{B}$$\n\nDe Morgan's theorem states that inverting the result of an AND/OR operation is mathematically equivalent to applying the dual operator to individually inverted inputs.",
+          "content_markdown": "### Fundamental Boolean Theorems\n\n#### 1. Fundamental Laws:\n* **Identity:** `A · 1 = A`, `A + 0 = A`\n* **Annihilator:** `A · 0 = 0`, `A + 1 = 1`\n* **Idempotence:** `A · A = A`, `A + A = A`\n* **Complement:** `A · A̅ = 0`, `A + A̅ = 1`\n* **Absorption:** `A + (A · B) = A`\n* **Involution (Double Negation):** `(A̅)̅ = A`\n\n#### 2. De Morgan's Theorems:\n> 📐 `(A · B)̅ = A̅ + B̅`\n> 📐 `(A + B)̅ = A̅ · B̅`\n\nDe Morgan's theorem states that inverting the result of an AND/OR operation is mathematically equivalent to applying the dual operator to individually inverted inputs.",
           "action_link": {
             "type": "boolean",
             "label": "Analyze De Morgan Theorem in Solver",
@@ -213,7 +213,7 @@
           "read_time_minutes": 6,
           "difficulty": "Intermediate",
           "tags": ["K-Map", "Gray Code", "Prime Implicants", "SOP"],
-          "content_markdown": "### Karnaugh Map Minimization\n\nA **Karnaugh Map (K-Map)** arranges minterms in a multidimensional Gray-code grid so that adjacent cells differ by only one boolean literal.\n\n#### Grouping Rules:\n1. Groups must contain a power of two cells ($1, 2, 4, 8, 16$).\n2. Groups must be rectangular.\n3. Wrap-around edges are adjacent (toroidal topology: column 0 wraps to column 3, row 0 wraps to row 3).\n4. Essential Prime Implicants (EPIs) contain at least one minterm not covered by any other group.\n5. Don't-Care cells ($X$) can be treated as $1$ to form larger groups or $0$ to avoid redundant terms.",
+          "content_markdown": "### Karnaugh Map Minimization\n\nA **Karnaugh Map (K-Map)** arranges minterms in a multidimensional Gray-code grid so that adjacent cells differ by only one boolean literal.\n\n#### Grouping Rules:\n1. Groups must contain a power of two cells (`1, 2, 4, 8, 16`).\n2. Groups must be rectangular.\n3. Wrap-around edges are adjacent (toroidal topology: column 0 wraps to column 3, row 0 wraps to row 3).\n4. Essential Prime Implicants (EPIs) contain at least one minterm not covered by any other group.\n5. Don't-Care cells (`X`) can be treated as `1` to form larger groups or `0` to avoid redundant terms.",
           "action_link": {
             "type": "boolean",
             "label": "Solve 4-Variable K-Map in BaseLogic",
@@ -273,7 +273,7 @@
           "read_time_minutes": 6,
           "difficulty": "Intermediate",
           "tags": ["NAND-Only", "NOR-Only", "Tied-Input Inverter", "De Morgan"],
-          "content_markdown": "### Universal Logic Gates\n\nNAND and NOR gates are classified as **universal logic gates** because any Boolean function can be implemented using exclusively one gate type.\n\n#### 1. Inverter Realization (Tied-Input Gate)\nTo form a NOT inverter using only a universal gate, tie all inputs together:\n* **NAND Inverter:** $\\overline{A \\cdot A} = \\overline{A}$\n* **NOR Inverter:** $\\overline{A + A} = \\overline{A}$\n\n#### 2. Two-Level Transformation Proof:\n* **NAND-NAND from SOP:** Apply involution and De Morgan to flat SOP:\n  $$F = AB + CD = \\overline{\\overline{AB + CD}} = \\overline{\\overline{AB} \\cdot \\overline{CD}}$$\n* **NOR-NOR from POS:** Apply involution and De Morgan to flat POS:\n  $$F = (A+B)(C+D) = \\overline{\\overline{(A+B)(C+D)}} = \\overline{\\overline{A+B} + \\overline{C+D}}$$\n\n#### 3. Strict Hardware Rules:\nXOR and XNOR gates are primary logic gates strictly designed to accept only **two binary inputs** and produce one output.",
+          "content_markdown": "### Universal Logic Gates\n\nNAND and NOR gates are classified as **universal logic gates** because any Boolean function can be implemented using exclusively one gate type.\n\n#### 1. Inverter Realization (Tied-Input Gate)\nTo form a NOT inverter using only a universal gate, tie all inputs together:\n* **NAND Inverter:** `(A · A)̅ = A̅`\n* **NOR Inverter:** `(A + A)̅ = A̅`\n\n#### 2. Two-Level Transformation Proof:\n* **NAND-NAND from SOP:** Apply involution and De Morgan to flat SOP:\n  > 📐 `F = AB + CD = ((AB + CD)̅)̅ = ((AB)̅ · (CD)̅)̅`\n* **NOR-NOR from POS:** Apply involution and De Morgan to flat POS:\n  > 📐 `F = (A+B)(C+D) = (((A+B)(C+D))̅)̅ = ((A+B)̅ + (C+D)̅)̅`\n\n#### 3. Strict Hardware Rules:\nXOR and XNOR gates are primary logic gates strictly designed to accept only **two binary inputs** and produce one output.",
           "action_link": {
             "type": "circuit",
             "label": "Synthesize NAND Full Adder in Circuit Designer",
@@ -301,7 +301,7 @@
           "read_time_minutes": 6,
           "difficulty": "Advanced",
           "tags": ["D Flip-Flop", "JK Flip-Flop", "Clock", "Ripple Counter"],
-          "content_markdown": "### Sequential Logic Circuits\n\nUnlike combinational logic (where outputs depend solely on present inputs), **sequential logic** incorporates memory feedback governed by a periodic clock signal.\n\n#### Flip-Flop Types:\n* **D Flip-Flop (Data):** Captures input $D$ on the active clock edge: $Q_{\\text{next}} = D$.\n* **T Flip-Flop (Toggle):** Toggles state when $T = 1$: $Q_{\\text{next}} = T \\oplus Q$.\n* **JK Flip-Flop:** Universal sequential element ($J=1, K=0 \\rightarrow \\text{Set}$; $J=0, K=1 \\rightarrow \\text{Reset}$; $J=1, K=1 \\rightarrow \\text{Toggle}$).\n\n#### Asynchronous Ripple Counters:\nChaining $N$ toggle flip-flops in series where $Q_i$ clocks the next stage creates an $N$-bit binary divider ($2^N$ states).",
+          "content_markdown": "### Sequential Logic Circuits\n\nUnlike combinational logic (where outputs depend solely on present inputs), **sequential logic** incorporates memory feedback governed by a periodic clock signal.\n\n#### Flip-Flop Types:\n* **D Flip-Flop (Data):** Captures input D on the active clock edge: `Q_next = D`.\n* **T Flip-Flop (Toggle):** Toggles state when T = 1: `Q_next = T ⊕ Q`.\n* **JK Flip-Flop:** Universal sequential element (`J=1, K=0` → Set; `J=0, K=1` → Reset; `J=1, K=1` → Toggle).\n\n#### Asynchronous Ripple Counters:\nChaining N toggle flip-flops in series where Qᵢ clocks the next stage creates an N-bit binary divider (2ⁿ states).",
           "action_link": {
             "type": "circuit",
             "label": "Open Flip-Flop Counter in Designer",
