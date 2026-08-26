@@ -15,7 +15,12 @@
           "summary": "Understanding positional notation, binary, octal, decimal, and hexadecimal radices.",
           "read_time_minutes": 4,
           "difficulty": "Beginner",
-          "tags": ["Base 2", "Base 10", "Base 16", "Radix"],
+          "tags": [
+            "Base 2",
+            "Base 10",
+            "Base 16",
+            "Radix"
+          ],
           "content_markdown": "### Positional Number Systems\n\nA **number system** represents numerical values using distinct digits weighted by positional powers of their base (radix `r`):\n\n> 📐 **General Positional Formula:**\n> `Value = (dₙ₋₁ · rⁿ⁻¹) + ... + (d₁ · r¹) + (d₀ · r⁰) + (d₋₁ · r⁻¹) + ... + (d₋ₘ · r⁻ᵐ)`\n\n#### Primary Radices in Computer Science:\n* **Binary (Base 2)**: Digits `{0, 1}`. The fundamental alphabet of digital transistor logic.\n* **Octal (Base 8)**: Digits `{0..7}`. Compact representation grouping 3 binary bits.\n* **Decimal (Base 10)**: Digits `{0..9}`. Standard human positional system.\n* **Hexadecimal (Base 16)**: Digits `{0..9, A..F}`. Primary system for memory addresses, grouping 4 binary bits (1 nibble).\n\n#### Comparative Radix Values:\n| Decimal | Binary (Base 2) | Octal (Base 8) | Hex (Base 16) |\n|:---:|:---:|:---:|:---:|\n| 0 | 0000 | 0 | 0 |\n| 5 | 0101 | 5 | 5 |\n| 10 | 1010 | 12 | A |\n| 15 | 1111 | 17 | F |\n| 16 | 0001 0000 | 20 | 10 |",
           "action_link": {
             "type": "converter",
@@ -32,37 +37,62 @@
             }
           ],
           "quiz": [
-    {
-      "question": "How many binary bits are represented by a single hexadecimal digit?",
-      "options": ["2 bits", "3 bits", "4 bits (1 nibble)", "8 bits (1 byte)"],
-      "correct_index": 2,
-      "explanation": "Because 2⁴ = 16, exactly 4 binary bits map to 1 hexadecimal digit."
-    },
-    {
-      "question": "What is the decimal equivalent of the binary number 1010₂?",
-      "options": ["8", "10", "12", "14"],
-      "correct_index": 1,
-      "explanation": "(1 × 2³) + (0 × 2²) + (1 × 2¹) + (0 × 2⁰) = 8 + 0 + 2 + 0 = 10."
-    },
-    {
-      "question": "How many binary bits are grouped together to form one octal digit?",
-      "options": ["2 bits", "3 bits", "4 bits", "8 bits"],
-      "correct_index": 1,
-      "explanation": "Since 2³ = 8, each octal digit corresponds to a group of 3 binary bits."
-    },
-    {
-      "question": "Which digit or letter represents the decimal value 15 in the hexadecimal system?",
-      "options": ["E", "F", "15", "A"],
-      "correct_index": 1,
-      "explanation": "Hexadecimal uses digits 0–9 and letters A–F, where A=10, B=11, C=12, D=13, E=14, and F=15."
-    },
-    {
-      "question": "What is the decimal value of the hexadecimal number 10₁₆?",
-      "options": ["10", "15", "16", "20"],
-      "correct_index": 2,
-      "explanation": "In base 16, the positional calculation is (1 × 16¹) + (0 × 16⁰) = 16 + 0 = 16."
-    }
-  ]
+            {
+              "question": "How many binary bits are represented by a single hexadecimal digit?",
+              "options": [
+                "2 bits",
+                "3 bits",
+                "4 bits (1 nibble)",
+                "8 bits (1 byte)"
+              ],
+              "correct_index": 2,
+              "explanation": "Because 2⁴ = 16, exactly 4 binary bits map to 1 hexadecimal digit."
+            },
+            {
+              "question": "What is the decimal equivalent of the binary number 1010₂?",
+              "options": [
+                "8",
+                "10",
+                "12",
+                "14"
+              ],
+              "correct_index": 1,
+              "explanation": "(1 × 2³) + (0 × 2²) + (1 × 2¹) + (0 × 2⁰) = 8 + 0 + 2 + 0 = 10."
+            },
+            {
+              "question": "How many binary bits are grouped together to form one octal digit?",
+              "options": [
+                "2 bits",
+                "3 bits",
+                "4 bits",
+                "8 bits"
+              ],
+              "correct_index": 1,
+              "explanation": "Since 2³ = 8, each octal digit corresponds to a group of 3 binary bits."
+            },
+            {
+              "question": "Which digit or letter represents the decimal value 15 in the hexadecimal system?",
+              "options": [
+                "E",
+                "F",
+                "15",
+                "A"
+              ],
+              "correct_index": 1,
+              "explanation": "Hexadecimal uses digits 0–9 and letters A–F, where A=10, B=11, C=12, D=13, E=14, and F=15."
+            },
+            {
+              "question": "What is the decimal value of the hexadecimal number 10₁₆?",
+              "options": [
+                "10",
+                "15",
+                "16",
+                "20"
+              ],
+              "correct_index": 2,
+              "explanation": "In base 16, the positional calculation is (1 × 16¹) + (0 × 16⁰) = 16 + 0 = 16."
+            }
+          ]
         },
         {
           "id": "base_conversions",
@@ -70,7 +100,11 @@
           "summary": "Master repeated division, polynomial expansion, and direct power-of-two bit grouping.",
           "read_time_minutes": 6,
           "difficulty": "Beginner",
-          "tags": ["Division Method", "Bit Grouping", "Fractional Conversion"],
+          "tags": [
+            "Division Method",
+            "Bit Grouping",
+            "Fractional Conversion"
+          ],
           "content_markdown": "### Conversion Methods\n\n#### 1. Decimal to Any Base (Repeated Division)\nDivide the decimal integer repeatedly by base `r` and collect remainders from **bottom to top** (MSB to LSB):\n\n**Example**: Convert 29₁₀ to Binary:\n* `29 ÷ 2 = 14` Remainder **1** (LSB)\n* `14 ÷ 2 = 7` Remainder **0**\n* `7 ÷ 2 = 3` Remainder **1**\n* `3 ÷ 2 = 1` Remainder **1**\n* `1 ÷ 2 = 0` Remainder **1** (MSB)\n* **Result:** `11101₂`\n\n#### 2. Direct 4-Bit & 3-Bit Grouping (Power of Two Shortcut)\nWhen converting between Binary and Hex/Octal, skip decimal conversion by grouping bits from the radix point:\n* **Binary to Hex:** Group into **4-bit nibbles** (`1101 1010₂ = DA₁₆`).\n* **Binary to Octal:** Group into **3-bit triplets** (`110 110₂ = 66₈`).",
           "action_link": {
             "type": "converter",
@@ -79,38 +113,62 @@
             "mode": "2"
           },
           "quiz": [
-  {
-    "question": "What is the binary equivalent of Hexadecimal 7F₁₆ using 4-bit nibble grouping?",
-    "options": ["0111 1111", "1110 1111", "0011 1111", "0111 1110"],
-    "correct_index": 0,
-    "explanation": "7 is 0111₂ and F is 1111₂, so 7F₁₆ = 0111 1111₂."
-  },
-  {
-    "question": "What is the octal equivalent of the binary number 110110₂ using 3-bit triplet grouping?",
-    "options": ["56₈", "66₈", "76₈", "46₈"],
-    "correct_index": 1,
-    "explanation": "Grouping the binary bits into 3-bit triplets gives 110₂ = 6 and 110₂ = 6, resulting in 66₈."
-  },
-  {
-    "question": "What is the remainder of 29 divided by 2 during the first step of converting 29₁₀ to binary via repeated division?",
-    "options": ["0", "1", "2", "14"],
-    "correct_index": 1,
-    "explanation": "29 ÷ 2 = 14 with a remainder of 1, which represents the Least Significant Bit (LSB)."
-  },
-  {
-    "question": "When converting a binary number to octal, how many bits are grouped together into each triplet?",
-    "options": ["2 bits", "3 bits", "4 bits", "8 bits"],
-    "correct_index": 1,
-    "explanation": "Since 2³ = 8, binary digits are grouped into 3-bit chunks from the radix point."
-  },
-  {
-    "question": "What is the hexadecimal equivalent of the binary number 1101 1010₂ using 4-bit nibble grouping?",
-    "options": ["CA₁₆", "DA₁₆", "EA₁₆", "FA₁₆"],
-    "correct_index": 1,
-    "explanation": "1101₂ equals 13 (D) and 1010₂ equals 10 (A), yielding DA₁₆."
-  }
-]
-
+            {
+              "question": "What is the binary equivalent of Hexadecimal 7F₁₆ using 4-bit nibble grouping?",
+              "options": [
+                "0111 1111",
+                "1110 1111",
+                "0011 1111",
+                "0111 1110"
+              ],
+              "correct_index": 0,
+              "explanation": "7 is 0111₂ and F is 1111₂, so 7F₁₆ = 0111 1111₂."
+            },
+            {
+              "question": "What is the octal equivalent of the binary number 110110₂ using 3-bit triplet grouping?",
+              "options": [
+                "56₈",
+                "66₈",
+                "76₈",
+                "46₈"
+              ],
+              "correct_index": 1,
+              "explanation": "Grouping the binary bits into 3-bit triplets gives 110₂ = 6 and 110₂ = 6, resulting in 66₈."
+            },
+            {
+              "question": "What is the remainder of 29 divided by 2 during the first step of converting 29₁₀ to binary via repeated division?",
+              "options": [
+                "0",
+                "1",
+                "2",
+                "14"
+              ],
+              "correct_index": 1,
+              "explanation": "29 ÷ 2 = 14 with a remainder of 1, which represents the Least Significant Bit (LSB)."
+            },
+            {
+              "question": "When converting a binary number to octal, how many bits are grouped together into each triplet?",
+              "options": [
+                "2 bits",
+                "3 bits",
+                "4 bits",
+                "8 bits"
+              ],
+              "correct_index": 1,
+              "explanation": "Since 2³ = 8, binary digits are grouped into 3-bit chunks from the radix point."
+            },
+            {
+              "question": "What is the hexadecimal equivalent of the binary number 1101 1010₂ using 4-bit nibble grouping?",
+              "options": [
+                "CA₁₆",
+                "DA₁₆",
+                "EA₁₆",
+                "FA₁₆"
+              ],
+              "correct_index": 1,
+              "explanation": "1101₂ equals 13 (D) and 1010₂ equals 10 (A), yielding DA₁₆."
+            }
+          ]
         },
         {
           "id": "digital_codes",
@@ -118,7 +176,12 @@
           "summary": "Self-complementing codes, unit distance Gray encodings, and BCD pseudotetrad detection.",
           "read_time_minutes": 5,
           "difficulty": "Intermediate",
-          "tags": ["BCD 8421", "Gray Code", "Excess-3", "Aiken 2421"],
+          "tags": [
+            "BCD 8421",
+            "Gray Code",
+            "Excess-3",
+            "Aiken 2421"
+          ],
           "content_markdown": "### Specialized Binary Encodings\n\n#### 1. Binary-Coded Decimal (BCD 8421)\nEncodes each decimal digit (`0..9`) into an independent 4-bit nibble.\n* Values `1010₂` through `1111₂` are **invalid pseudotetrads** in standard 8421 BCD.\n\n#### 2. Gray Code (Unit Distance / Reflected Binary)\nAdjacent numerical values differ by **only 1 single bit transition**, eliminating mechanical glitching in rotary shaft encoders and Karnaugh map headers.\n\n* **Binary to Gray Conversion:**\n  * `Gₙ = Bₙ`\n  * `Gᵢ = Bᵢ₊₁ ⊕ Bᵢ`\n\n#### 3. Excess-3 (Biased +3) & Aiken 2421\n* **Excess-3:** `Digit + 3`. It is **self-complementing**, meaning its 1's complement directly yields the 9's complement of the decimal digit!\n* **Aiken 2421:** Weighted self-complementing code using weights `2, 4, 2, 1`.",
           "action_link": {
             "type": "converter",
@@ -127,63 +190,64 @@
             "mode": "10"
           },
           "quiz": [
-  {
-    "question": "Why is Gray Code preferred in mechanical rotary encoders?",
-    "options": [
-      "Only 1 bit changes at a time, preventing transition race glitches",
-      "It uses fewer wires than standard binary",
-      "It can store negative numbers without signs",
-      "It allows direct multiplication by 3"
-    ],
-    "correct_index": 0,
-    "explanation": "Because only a single bit changes between adjacent values, asynchronous mechanical sensor bounce cannot produce invalid intermediate states."
-  },
-  {
-    "question": "Which of the following 4-bit patterns is an invalid pseudotetrad in BCD 8421?",
-    "options": [
-      "0111₂",
-      "1001₂",
-      "1100₂",
-      "0000₂"
-    ],
-    "correct_index": 2,
-    "explanation": "Standard 8421 BCD only encodes decimal digits 0–9 (0000₂ to 1001₂). Patterns from 1010₂ (10) through 1111₂ (15) are invalid pseudotetrads."
-  },
-  {
-    "question": "What is the Excess-3 code representation for the decimal digit 5?",
-    "options": [
-      "0101₂",
-      "1000₂",
-      "0011₂",
-      "0110₂"
-    ],
-    "correct_index": 1,
-    "explanation": "Excess-3 adds 3 to the decimal digit before encoding into binary: 5 + 3 = 8, which is 1000₂."
-  },
-  {
-    "question": "What mathematical property makes Excess-3 and Aiken 2421 codes 'self-complementing'?",
-    "options": [
-      "Their 1's complement directly yields the 9's complement of the decimal digit",
-      "They can only represent even numbers",
-      "They invert the sign bit for negative numbers automatically",
-      "Their 2's complement equals zero"
-    ],
-    "correct_index": 0,
-    "explanation": "In a self-complementing code, inverting every bit (1's complement) produces the exact encoding for (9 − digit), which is the 9's complement."
-  },
-  {
-    "question": "Given binary 1100₂, what is its equivalent 4-bit Gray Code representation?",
-    "options": [
-      "1010₂",
-      "1110₂",
-      "1000₂",
-      "0110₂"
-    ],
-    "correct_index": 0,
-    "explanation": "G₃ = B₃ = 1; G₂ = B₃ ⊕ B₂ = 1 ⊕ 1 = 0; G₁ = B₂ ⊕ B₁ = 1 ⊕ 0 = 1; G₀ = B₁ ⊕ B₀ = 0 ⊕ 0 = 0. Thus, the Gray Code is 1010₂."
-  }
-]
-
+            {
+              "question": "Why is Gray Code preferred in mechanical rotary encoders?",
+              "options": [
+                "Only 1 bit changes at a time, preventing transition race glitches",
+                "It uses fewer wires than standard binary",
+                "It can store negative numbers without signs",
+                "It allows direct multiplication by 3"
+              ],
+              "correct_index": 0,
+              "explanation": "Because only a single bit changes between adjacent values, asynchronous mechanical sensor bounce cannot produce invalid intermediate states."
+            },
+            {
+              "question": "Which of the following 4-bit patterns is an invalid pseudotetrad in BCD 8421?",
+              "options": [
+                "0111₂",
+                "1001₂",
+                "1100₂",
+                "0000₂"
+              ],
+              "correct_index": 2,
+              "explanation": "Standard 8421 BCD only encodes decimal digits 0–9 (0000₂ to 1001₂). Patterns from 1010₂ (10) through 1111₂ (15) are invalid pseudotetrads."
+            },
+            {
+              "question": "What is the Excess-3 code representation for the decimal digit 5?",
+              "options": [
+                "0101₂",
+                "1000₂",
+                "0011₂",
+                "0110₂"
+              ],
+              "correct_index": 1,
+              "explanation": "Excess-3 adds 3 to the decimal digit before encoding into binary: 5 + 3 = 8, which is 1000₂."
+            },
+            {
+              "question": "What mathematical property makes Excess-3 and Aiken 2421 codes 'self-complementing'?",
+              "options": [
+                "Their 1's complement directly yields the 9's complement of the decimal digit",
+                "They can only represent even numbers",
+                "They invert the sign bit for negative numbers automatically",
+                "Their 2's complement equals zero"
+              ],
+              "correct_index": 0,
+              "explanation": "In a self-complementing code, inverting every bit (1's complement) produces the exact encoding for (9 − digit), which is the 9's complement."
+            },
+            {
+              "question": "Given binary 1100₂, what is its equivalent 4-bit Gray Code representation?",
+              "options": [
+                "1010₂",
+                "1110₂",
+                "1000₂",
+                "0110₂"
+              ],
+              "correct_index": 0,
+              "explanation": "G₃ = B₃ = 1; G₂ = B₃ ⊕ B₂ = 1 ⊕ 1 = 0; G₁ = B₂ ⊕ B₁ = 1 ⊕ 0 = 1; G₀ = B₁ ⊕ B₀ = 0 ⊕ 0 = 0. Thus, the Gray Code is 1010₂."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "binary_arithmetic",
@@ -198,7 +262,12 @@
           "summary": "Full adder math, carry cascade propagation, and two's complement sign-magnitude subtraction.",
           "read_time_minutes": 5,
           "difficulty": "Beginner",
-          "tags": ["Addition", "Subtraction", "2's Complement", "Overflow"],
+          "tags": [
+            "Addition",
+            "Subtraction",
+            "2's Complement",
+            "Overflow"
+          ],
           "content_markdown": "### Binary Arithmetic Rules\n\n#### 1. Binary Addition Truth Table\n* `0 + 0 = 0`\n* `0 + 1 = 1`\n* `1 + 0 = 1`\n* `1 + 1 = 0` (Carry 1)\n* `1 + 1 + 1 = 1` (Carry 1)\n\n#### 2. Two's Complement Subtraction (A - B)\nComputers perform subtraction using addition:\n> 📐 `A - B = A + (~B + 1)`\n1. Invert all bits of subtrahend B (One's complement).\n2. Add 1 (Two's complement).\n3. Add to A.\n\n#### 3. Signed Overflow Rule (V)\nAn overflow occurs if two operands with the same sign produce a result with the opposite sign:\n> 📐 `V = Cin ⊕ Cout`",
           "action_link": {
             "type": "workout",
@@ -209,7 +278,12 @@
           "quiz": [
             {
               "question": "What is the 8-bit Two's Complement representation of -5?",
-              "options": ["1111 1011", "1000 0101", "1111 1010", "1111 1101"],
+              "options": [
+                "1111 1011",
+                "1000 0101",
+                "1111 1010",
+                "1111 1101"
+              ],
               "correct_index": 0,
               "explanation": "+5 is 0000 0101. Inverting bits gives 1111 1010. Adding 1 yields 1111 1011."
             }
@@ -221,7 +295,12 @@
           "summary": "Signed binary multiplication using bit-pair recoding and arithmetic right shifts.",
           "read_time_minutes": 6,
           "difficulty": "Advanced",
-          "tags": ["Booth's Algorithm", "ALU", "Multiplication", "SAR"],
+          "tags": [
+            "Booth's Algorithm",
+            "ALU",
+            "Multiplication",
+            "SAR"
+          ],
           "content_markdown": "### Booth's Multiplication Algorithm\n\nBooth's algorithm efficiently multiplies signed 2's complement integers by treating contiguous blocks of 1s as a single subtraction and addition:\n\n> 📐 `...011110... = 2ᵏ⁺ⁿ - 2ᵏ`\n\n#### Algorithm Flow:\n1. Initialize Register `A = 0`, `Q = Multiplier`, `Q₋₁ = 0`, `M = Multiplicand`.\n2. Inspect the two least significant bits `(Q₀, Q₋₁)`:\n   * **`10`**: `A = A - M`, then Arithmetic Shift Right (SAR) `[A, Q, Q₋₁]`.\n   * **`01`**: `A = A + M`, then Arithmetic Shift Right (SAR) `[A, Q, Q₋₁]`.\n   * **`00` or `11`**: Arithmetic Shift Right (SAR) `[A, Q, Q₋₁]`.\n3. Repeat for N bit cycles. Final product is concatenated in `[A, Q]`.",
           "action_link": {
             "type": "arithmetic",
@@ -249,7 +328,12 @@
           "summary": "Single error correction and double error detection with parity generator matrices.",
           "read_time_minutes": 6,
           "difficulty": "Advanced",
-          "tags": ["Hamming (7,4)", "SEC-DED", "Syndrome", "Error Correction"],
+          "tags": [
+            "Hamming (7,4)",
+            "SEC-DED",
+            "Syndrome",
+            "Error Correction"
+          ],
           "content_markdown": "### Hamming Error Correcting Codes\n\nHamming codes embed parity check bits at power-of-2 bit positions (`P₁=1, P₂=2, P₄=4, P₈=8`) into data bits (`D₃, D₅, D₆, D₇`):\n\n> 📐 **Codeword Structure:** `[P₁, P₂, D₃, P₄, D₅, D₆, D₇]`\n\n#### Parity Coverage Equations (Even Parity):\n* `P₁ = D₃ ⊕ D₅ ⊕ D₇`\n* `P₂ = D₃ ⊕ D₆ ⊕ D₇`\n* `P₄ = D₅ ⊕ D₆ ⊕ D₇`\n\n#### Syndrome Decoding:\nCalculate syndrome vector `S = [s₃, s₂, s₁]`. If `S = 0`, no error occurred. If `S ≠ 0`, the binary value of `S` points directly to the erroneous bit index, which is flipped to correct the error!",
           "action_link": {
             "type": "arithmetic",
@@ -260,7 +344,12 @@
           "quiz": [
             {
               "question": "If a Hamming (7,4) decoder computes syndrome vector S = [1, 0, 1] (binary 5), which bit is erroneous?",
-              "options": ["Bit 5 (D₂)", "Bit 1 (P₁)", "Bit 7 (D₄)", "No error occurred"],
+              "options": [
+                "Bit 5 (D₂)",
+                "Bit 1 (P₁)",
+                "Bit 7 (D₄)",
+                "No error occurred"
+              ],
               "correct_index": 0,
               "explanation": "Syndrome 101₂ = 5 in decimal, identifying bit index 5 as the flipped bit."
             }
@@ -281,7 +370,12 @@
           "summary": "Master identity, absorption, involution, and De Morgan algebraic transformations.",
           "read_time_minutes": 5,
           "difficulty": "Beginner",
-          "tags": ["De Morgan", "Involution", "Boolean Algebra", "Axioms"],
+          "tags": [
+            "De Morgan",
+            "Involution",
+            "Boolean Algebra",
+            "Axioms"
+          ],
           "content_markdown": "### Fundamental Boolean Theorems\n\n#### 1. Fundamental Laws:\n* **Identity:** `A · 1 = A`, `A + 0 = A`\n* **Annihilator:** `A · 0 = 0`, `A + 1 = 1`\n* **Idempotence:** `A · A = A`, `A + A = A`\n* **Complement:** `A · A̅ = 0`, `A + A̅ = 1`\n* **Absorption:** `A + (A · B) = A`\n* **Involution (Double Negation):** `(A̅)̅ = A`\n\n#### 2. De Morgan's Theorems:\n> 📐 `(A · B)̅ = A̅ + B̅`\n> 📐 `(A + B)̅ = A̅ · B̅`\n\nDe Morgan's theorem states that inverting the result of an AND/OR operation is mathematically equivalent to applying the dual operator to individually inverted inputs.",
           "action_link": {
             "type": "boolean",
@@ -292,7 +386,12 @@
           "quiz": [
             {
               "question": "What is the De Morgan equivalent of !(A + B)?",
-              "options": ["!A & !B", "!A | !B", "A & B", "!(A & B)"],
+              "options": [
+                "!A & !B",
+                "!A | !B",
+                "A & B",
+                "!(A & B)"
+              ],
               "correct_index": 0,
               "explanation": "!(A + B) transforms the OR into AND with each literal inverted: !A & !B."
             }
@@ -304,7 +403,12 @@
           "summary": "Visual grouping of adjacent 1s and 0s in Gray-code planar and toroidal grids.",
           "read_time_minutes": 6,
           "difficulty": "Intermediate",
-          "tags": ["K-Map", "Gray Code", "Prime Implicants", "SOP"],
+          "tags": [
+            "K-Map",
+            "Gray Code",
+            "Prime Implicants",
+            "SOP"
+          ],
           "content_markdown": "### Karnaugh Map Minimization\n\nA **Karnaugh Map (K-Map)** arranges minterms in a multidimensional Gray-code grid so that adjacent cells differ by only one boolean literal.\n\n#### Grouping Rules:\n1. Groups must contain a power of two cells (`1, 2, 4, 8, 16`).\n2. Groups must be rectangular.\n3. Wrap-around edges are adjacent (toroidal topology: column 0 wraps to column 3, row 0 wraps to row 3).\n4. Essential Prime Implicants (EPIs) contain at least one minterm not covered by any other group.\n5. Don't-Care cells (`X`) can be treated as `1` to form larger groups or `0` to avoid redundant terms.",
           "action_link": {
             "type": "boolean",
@@ -315,7 +419,12 @@
           "quiz": [
             {
               "question": "How many literals are eliminated when grouping 4 adjacent cells in a 4-variable K-Map?",
-              "options": ["2 literals", "1 literal", "3 literals", "4 literals"],
+              "options": [
+                "2 literals",
+                "1 literal",
+                "3 literals",
+                "4 literals"
+              ],
               "correct_index": 0,
               "explanation": "A group of size 2ᵏ eliminates k variables. For group size 4 = 2², exactly 2 literals are eliminated."
             }
@@ -327,7 +436,12 @@
           "summary": "Exact tabular minimization for up to 6 variables using Petrick's branch & bound cover.",
           "read_time_minutes": 6,
           "difficulty": "Advanced",
-          "tags": ["Quine-McCluskey", "EPI", "Petrick's Method", "Tabular"],
+          "tags": [
+            "Quine-McCluskey",
+            "EPI",
+            "Petrick's Method",
+            "Tabular"
+          ],
           "content_markdown": "### Quine-McCluskey Method\n\nFor complex functions with 4 to 6+ variables, the **Quine-McCluskey (QM)** algorithm provides exact, automated tabular minimization:\n\n#### Step-by-Step Algorithm:\n1. **Hamming Weight Partitioning:** Group minterms by count of 1-bits.\n2. **Systematic Column Merging:** Compare terms between adjacent groups differing in exactly one position, replacing varying bits with dashes (`-`).\n3. **Prime Implicant Table:** Unmerged terms form Prime Implicants (PIs).\n4. **Essential PI Extraction:** Identify columns covered by only one PI.\n5. **Branch & Bound Set Cover:** Find the minimal term and minimal literal solution for remaining minterms.",
           "action_link": {
             "type": "boolean",
@@ -364,7 +478,12 @@
           "summary": "Synthesize arbitrary multi-output digital circuits using only NAND or only NOR gates.",
           "read_time_minutes": 6,
           "difficulty": "Intermediate",
-          "tags": ["NAND-Only", "NOR-Only", "Tied-Input Inverter", "De Morgan"],
+          "tags": [
+            "NAND-Only",
+            "NOR-Only",
+            "Tied-Input Inverter",
+            "De Morgan"
+          ],
           "content_markdown": "### Universal Logic Gates\n\nNAND and NOR gates are classified as **universal logic gates** because any Boolean function can be implemented using exclusively one gate type.\n\n#### 1. Inverter Realization (Tied-Input Gate)\nTo form a NOT inverter using only a universal gate, tie all inputs together:\n* **NAND Inverter:** `(A · A)̅ = A̅`\n* **NOR Inverter:** `(A + A)̅ = A̅`\n\n#### 2. Two-Level Transformation Proof:\n* **NAND-NAND from SOP:** Apply involution and De Morgan to flat SOP:\n  > 📐 `F = AB + CD = ((AB + CD)̅)̅ = ((AB)̅ · (CD)̅)̅`\n* **NOR-NOR from POS:** Apply involution and De Morgan to flat POS:\n  > 📐 `F = (A+B)(C+D) = (((A+B)(C+D))̅)̅ = ((A+B)̅ + (C+D)̅)̅`\n\n#### 3. Strict Hardware Rules:\nXOR and XNOR gates are primary logic gates strictly designed to accept only **two binary inputs** and produce one output.",
           "action_link": {
             "type": "circuit",
@@ -392,7 +511,12 @@
           "summary": "Edge-triggered clocking, D/JK/T Flip-Flops, and 4-Bit ripple binary counters.",
           "read_time_minutes": 6,
           "difficulty": "Advanced",
-          "tags": ["D Flip-Flop", "JK Flip-Flop", "Clock", "Ripple Counter"],
+          "tags": [
+            "D Flip-Flop",
+            "JK Flip-Flop",
+            "Clock",
+            "Ripple Counter"
+          ],
           "content_markdown": "### Sequential Logic Circuits\n\nUnlike combinational logic (where outputs depend solely on present inputs), **sequential logic** incorporates memory feedback governed by a periodic clock signal.\n\n#### Flip-Flop Types:\n* **D Flip-Flop (Data):** Captures input D on the active clock edge: `Q_next = D`.\n* **T Flip-Flop (Toggle):** Toggles state when T = 1: `Q_next = T ⊕ Q`.\n* **JK Flip-Flop:** Universal sequential element (`J=1, K=0` → Set; `J=0, K=1` → Reset; `J=1, K=1` → Toggle).\n\n#### Asynchronous Ripple Counters:\nChaining N toggle flip-flops in series where Qᵢ clocks the next stage creates an N-bit binary divider (2ⁿ states).",
           "action_link": {
             "type": "circuit",
@@ -403,7 +527,12 @@
           "quiz": [
             {
               "question": "What is the next state Qₙₑₓₜ of a JK Flip-Flop when both J = 1 and K = 1 on a clock pulse?",
-              "options": ["Toggle (Q' or not Q)", "Set to 1", "Reset to 0", "Undefined / Race Condition"],
+              "options": [
+                "Toggle (Q' or not Q)",
+                "Set to 1",
+                "Reset to 0",
+                "Undefined / Race Condition"
+              ],
               "correct_index": 0,
               "explanation": "When J = 1 and K = 1, the JK flip-flop toggles its output state on every active clock edge."
             }
