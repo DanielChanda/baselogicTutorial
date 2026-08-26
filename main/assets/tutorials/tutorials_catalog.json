@@ -268,7 +268,7 @@
             "2's Complement",
             "Overflow"
           ],
-          "content_markdown": "### Binary Arithmetic Rules\n\n#### 1. Binary Addition Truth Table\n* `0 + 0 = 0`\n* `0 + 1 = 1`\n* `1 + 0 = 1`\n* `1 + 1 = 0` (Carry 1)\n* `1 + 1 + 1 = 1` (Carry 1)\n\n#### 2. Two's Complement Subtraction (A - B)\nComputers perform subtraction using addition:\n> 📐 `A - B = A + (~B + 1)`\n1. Invert all bits of subtrahend B (One's complement).\n2. Add 1 (Two's complement).\n3. Add to A.\n\n#### 3. Signed Overflow Rule (V)\nAn overflow occurs if two operands with the same sign produce a result with the opposite sign:\n> 📐 `V = Cin ⊕ Cout`",
+          "content_markdown": "### Binary Arithmetic & 2's Complement Logic\n\nBinary arithmetic forms the computational backbone of modern Arithmetic Logic Units (ALUs).\n\n#### 1. Fundamental Adder Circuit Equations:\n* **Half Adder (2 Inputs):**\n  * Sum: $S = A \\oplus B$\n  * Carry: $C_{out} = A \\cdot B$\n* **Full Adder (3 Inputs: A, B, Cin):**\n  * Sum: $S = A \\oplus B \\oplus C_{in}$\n  * Carry: $C_{out} = (A \\cdot B) + (C_{in} \\cdot (A \\oplus B))$\n\n#### 2. Two's Complement System (Signed Integer Math)\nIn an $n$-bit system, positive numbers range from $0$ to $+2^{n-1}-1$, while negative numbers span from $-1$ to $-2^{n-1}$.\n* **Forming 2's Complement:** $\\text{Two's Complement}(B) = \\overline{B} + 1$.\n* **Hardware Subtraction ($A - B$):** ALU computes $A + \\overline{B} + 1$ using an adder with inverted $B$ inputs and setting $C_{in} = 1$.\n\n#### 3. Signed vs. Unsigned Overflow Rules:\n* **Unsigned Overflow:** Occurs when there is an end carry out of the MSB ($C_{out} = 1$).\n* **Signed Overflow ($V$):** Occurs when adding two numbers of the same sign produces a result with the opposite sign:\n  > 📐 $V = C_{in(\\text{MSB})} \\oplus C_{out(\\text{MSB})}$\n  * If $V = 1$, the arithmetic result has exceeded the representable range.",
           "action_link": {
             "type": "workout",
             "label": "Practice Column Addition & Carries",
@@ -277,7 +277,7 @@
           },
           "quiz": [
             {
-              "question": "What is the 8-bit Two's Complement representation of -5?",
+              "question": "What is the 8-bit Two's Complement representation of decimal -5?",
               "options": [
                 "1111 1011",
                 "1000 0101",
@@ -285,7 +285,51 @@
                 "1111 1101"
               ],
               "correct_index": 0,
-              "explanation": "+5 is 0000 0101. Inverting bits gives 1111 1010. Adding 1 yields 1111 1011."
+              "explanation": "+5 in 8-bit binary is 0000 0101. Inverting all bits gives 1111 1010 (1's complement), and adding 1 gives 1111 1011 (2's complement)."
+            },
+            {
+              "question": "What are the logic equations for the Sum (S) and Carry-out (Cout) of a Full Adder with inputs A, B, and Cin?",
+              "options": [
+                "S = A ⊕ B ⊕ Cin; Cout = (A · B) + (Cin · (A ⊕ B))",
+                "S = A · B · Cin; Cout = A + B + Cin",
+                "S = A ⊕ B; Cout = A · B",
+                "S = A + B + Cin; Cout = A ⊕ B ⊕ Cin"
+              ],
+              "correct_index": 0,
+              "explanation": "A Full Adder computes Sum as three-way XOR (A ⊕ B ⊕ Cin) and generates Carry-out when at least two inputs are 1: (A · B) + Cin · (A ⊕ B)."
+            },
+            {
+              "question": "How is hardware binary subtraction (A - B) executed using a parallel adder?",
+              "options": [
+                "Feed A and bitwise NOT of B into the adder with initial carry Cin = 1",
+                "Feed NOT of A and B with Cin = 0",
+                "Subtract bitwise without carry propagation",
+                "Multiply B by -1 with a shifter before adding"
+              ],
+              "correct_index": 0,
+              "explanation": "Since A - B = A + (~B + 1), inverting B with XOR gates and asserting Cin = 1 performs exact two's complement subtraction using standard adder circuitry."
+            },
+            {
+              "question": "In an 8-bit signed two's complement system, what condition flags a signed arithmetic overflow (V)?",
+              "options": [
+                "Carry-in to the MSB differs from Carry-out of the MSB (Cin ⊕ Cout = 1)",
+                "End carry out of the MSB equals 1 (Cout = 1)",
+                "The result ends with a 0 bit",
+                "Both operands are odd numbers"
+              ],
+              "correct_index": 0,
+              "explanation": "Signed overflow occurs if and only if the carry entering the sign bit does not match the carry leaving it: V = Cin(MSB) ⊕ Cout(MSB)."
+            },
+            {
+              "question": "What is the representable integer range in an 8-bit signed two's complement format?",
+              "options": [
+                "-128 to +127",
+                "-127 to +128",
+                "-256 to +255",
+                "0 to 255"
+              ],
+              "correct_index": 0,
+              "explanation": "For n = 8 bits, the two's complement range is from -2⁷ (-128) to +(2⁷ - 1) (+127)."
             }
           ]
         },
@@ -301,7 +345,7 @@
             "Multiplication",
             "SAR"
           ],
-          "content_markdown": "### Booth's Multiplication Algorithm\n\nBooth's algorithm efficiently multiplies signed 2's complement integers by treating contiguous blocks of 1s as a single subtraction and addition:\n\n> 📐 `...011110... = 2ᵏ⁺ⁿ - 2ᵏ`\n\n#### Algorithm Flow:\n1. Initialize Register `A = 0`, `Q = Multiplier`, `Q₋₁ = 0`, `M = Multiplicand`.\n2. Inspect the two least significant bits `(Q₀, Q₋₁)`:\n   * **`10`**: `A = A - M`, then Arithmetic Shift Right (SAR) `[A, Q, Q₋₁]`.\n   * **`01`**: `A = A + M`, then Arithmetic Shift Right (SAR) `[A, Q, Q₋₁]`.\n   * **`00` or `11`**: Arithmetic Shift Right (SAR) `[A, Q, Q₋₁]`.\n3. Repeat for N bit cycles. Final product is concatenated in `[A, Q]`.",
+          "content_markdown": "### Booth's Multiplication Algorithm\n\nBooth's algorithm is an efficient hardware technique for multiplying signed two's complement binary numbers. It treats strings of consecutive 1s as a single addition and subtraction operation ($2^{k+m} - 2^k$).\n\n#### 1. Hardware Registers & Setup:\n* **Register A (Accumulator):** Initialized to $0$ ($n$ bits).\n* **Register Q (Multiplier):** Loaded with multiplier ($n$ bits).\n* **Flip-Flop $Q_{-1}$:** Initialized to $0$ ($1$ bit).\n* **Register M (Multiplicand):** Loaded with multiplicand ($n$ bits).\n* **Cycle Counter:** Initialized to $n$.\n\n#### 2. Bit-Pair Decision Table:\n| $(Q_0, Q_{-1})$ | Operation | Description |\n|:---:|:---|:---|\n| **`10`** | $A \\leftarrow A - M$ | Beginning of a block of 1s (subtract multiplicand) |\n| **`01`** | $A \\leftarrow A + M$ | End of a block of 1s (add multiplicand) |\n| **`00`** | No arithmetic | Interior of a block of 0s |\n| **`11`** | No arithmetic | Interior of a block of 1s |\n\n#### 3. Shift Step (Arithmetic Shift Right - SAR):\nAfter any arithmetic operation (or if no operation is needed), perform an **Arithmetic Shift Right (SAR)** across the combined register bundle $[A, Q, Q_{-1}]$:\n* The MSB of $A$ is copied into itself (sign extension preservation).\n* The LSB of $A$ shifts into the MSB of $Q$.\n* The LSB of $Q$ shifts into $Q_{-1}$.\n* Decrement count; repeat for all $n$ cycles. The final $2n$-bit signed product resides in $[A, Q]$.",
           "action_link": {
             "type": "arithmetic",
             "label": "Simulate 7 × -3 in Booth ALU",
@@ -312,13 +356,57 @@
             {
               "question": "What action does Booth's algorithm perform when inspecting bit-pair (Q₀, Q₋₁) = 10?",
               "options": [
-                "Subtract M from A (A = A - M), then SAR",
-                "Add M to A (A = A + M), then SAR",
-                "Only shift without arithmetic",
-                "Reset register Q to zero"
+                "Subtract M from A (A = A - M), then SAR [A, Q, Q₋₁]",
+                "Add M to A (A = A + M), then SAR [A, Q, Q₋₁]",
+                "Only perform Arithmetic Shift Right (SAR)",
+                "Clear register A to zero"
               ],
               "correct_index": 0,
-              "explanation": "Pattern 10 indicates the start of a block of 1s, requiring A = A - M before shifting."
+              "explanation": "The bit pattern 10 signifies the leading edge of a block of 1s, requiring subtracting the multiplicand (A = A - M) followed by an arithmetic shift right."
+            },
+            {
+              "question": "What occurs during an Arithmetic Shift Right (SAR) on register bundle [A, Q, Q₋₁]?",
+              "options": [
+                "The sign bit (MSB) of A is replicated/preserved while all bits shift right",
+                "A zero is shifted into the MSB of A",
+                "Register Q is rotated circularly into register A",
+                "Only register Q shifts right while register A remains unchanged"
+              ],
+              "correct_index": 0,
+              "explanation": "Arithmetic Shift Right preserves the sign of signed two's complement numbers by replicating the most significant bit (sign bit) of register A."
+            },
+            {
+              "question": "What is the primary advantage of Booth's algorithm over standard unsigned shift-and-add multiplication?",
+              "options": [
+                "It operates directly on signed two's complement numbers and reduces additions for contiguous 1s",
+                "It eliminates the need for any adder hardware",
+                "It can only multiply positive numbers",
+                "It computes the product in a single clock cycle without shifting"
+              ],
+              "correct_index": 0,
+              "explanation": "Booth's algorithm natively handles positive and negative 2's complement operands and speeds up calculation when strings of 1s are encountered."
+            },
+            {
+              "question": "What operation is executed when the inspected bit-pair (Q₀, Q₋₁) is 00 or 11?",
+              "options": [
+                "No arithmetic operation; perform SAR only",
+                "Add M to A, then SAR",
+                "Subtract M from A, then SAR",
+                "Invert all bits in register Q"
+              ],
+              "correct_index": 0,
+              "explanation": "Patterns 00 (streak of zeros) and 11 (streak of ones) require no arithmetic operation, so the hardware only performs the SAR shift step."
+            },
+            {
+              "question": "For two 4-bit numbers, how many shift-and-decision cycles does standard Booth's algorithm execute?",
+              "options": [
+                "4 cycles",
+                "8 cycles",
+                "2 cycles",
+                "16 cycles"
+              ],
+              "correct_index": 0,
+              "explanation": "Booth's algorithm runs for n cycles, where n is the word length of the multiplier (4 cycles for 4-bit operands)."
             }
           ]
         },
@@ -334,7 +422,7 @@
             "Syndrome",
             "Error Correction"
           ],
-          "content_markdown": "### Hamming Error Correcting Codes\n\nHamming codes embed parity check bits at power-of-2 bit positions (`P₁=1, P₂=2, P₄=4, P₈=8`) into data bits (`D₃, D₅, D₆, D₇`):\n\n> 📐 **Codeword Structure:** `[P₁, P₂, D₃, P₄, D₅, D₆, D₇]`\n\n#### Parity Coverage Equations (Even Parity):\n* `P₁ = D₃ ⊕ D₅ ⊕ D₇`\n* `P₂ = D₃ ⊕ D₆ ⊕ D₇`\n* `P₄ = D₅ ⊕ D₆ ⊕ D₇`\n\n#### Syndrome Decoding:\nCalculate syndrome vector `S = [s₃, s₂, s₁]`. If `S = 0`, no error occurred. If `S ≠ 0`, the binary value of `S` points directly to the erroneous bit index, which is flipped to correct the error!",
+          "content_markdown": "### Hamming Error Correcting Codes (SEC-DED)\n\nHamming codes provide **Single Error Correction (SEC)** and, with an additional overall parity bit, **Double Error Detection (DED)**.\n\n#### 1. Bit Allocation in Hamming (7,4):\nParity check bits are placed strictly at power-of-2 bit positions ($1, 2, 4, 8, \\dots$), while data bits occupy the remaining slots:\n\n| Bit Position: | 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|\n| **Bit Name:** | $P_1$ | $P_2$ | $D_3$ | $P_4$ | $D_5$ | $D_6$ | $D_7$ |\n| **Binary Index:** | `001` | `010` | `011` | `100` | `101` | `110` | `111` |\n\n#### 2. Parity Generator Equations (Even Parity):\nEach parity bit $P_k$ covers all bit indices whose binary representations have a 1 in position $k$:\n* $P_1 = D_3 \\oplus D_5 \\oplus D_7$ (covers bits 1, 3, 5, 7)\n* $P_2 = D_3 \\oplus D_6 \\oplus D_7$ (covers bits 2, 3, 6, 7)\n* $P_4 = D_5 \\oplus D_6 \\oplus D_7$ (covers bits 4, 5, 6, 7)\n\n#### 3. Syndrome Vector & Error Localization:\nUpon receiving codeword $[r_1, r_2, r_3, r_4, r_5, r_6, r_7]$, the receiver calculates syndrome bits:\n* $s_1 = r_1 \\oplus r_3 \\oplus r_5 \\oplus r_7$\n* $s_2 = r_2 \\oplus r_3 \\oplus r_6 \\oplus r_7$\n* $s_3 = r_4 \\oplus r_5 \\oplus r_6 \\oplus r_7$\n* Syndrome Value $S = (s_3 s_2 s_1)_2$:\n  * If $S = 0$, the received transmission is error-free.\n  * If $S \\neq 0$, the decimal value of $S$ is the exact **1-based bit index** of the flipped bit. Flipping bit $r_S$ corrects the transmission!",
           "action_link": {
             "type": "arithmetic",
             "label": "Test Hamming (7,4) in Error Engine",
@@ -345,13 +433,57 @@
             {
               "question": "If a Hamming (7,4) decoder computes syndrome vector S = [1, 0, 1] (binary 5), which bit is erroneous?",
               "options": [
-                "Bit 5 (D₂)",
+                "Bit 5 (D₅)",
                 "Bit 1 (P₁)",
-                "Bit 7 (D₄)",
+                "Bit 7 (D₇)",
                 "No error occurred"
               ],
               "correct_index": 0,
-              "explanation": "Syndrome 101₂ = 5 in decimal, identifying bit index 5 as the flipped bit."
+              "explanation": "Syndrome 101₂ = 5 in decimal. In Hamming code, the syndrome directly indicates the exact bit position containing the single-bit error."
+            },
+            {
+              "question": "Where are the parity check bits positioned within a standard Hamming codeword?",
+              "options": [
+                "Strictly at power-of-two bit positions (1, 2, 4, 8, ...)",
+                "At the beginning of the codeword only",
+                "At the end of the codeword only",
+                "At odd-numbered bit positions (1, 3, 5, 7, ...)"
+              ],
+              "correct_index": 0,
+              "explanation": "Parity bits are placed at bit indices that are powers of 2 (1, 2, 4, 8, etc.) because each index has exactly one '1' in its binary position vector."
+            },
+            {
+              "question": "What minimum Hamming distance (d_min) is required between codewords to achieve Single Error Correction (SEC)?",
+              "options": [
+                "d_min = 3",
+                "d_min = 1",
+                "d_min = 2",
+                "d_min = 4"
+              ],
+              "correct_index": 0,
+              "explanation": "To correct t errors, a code requires d_min ≥ 2t + 1. For single error correction (t = 1), d_min must be at least 2(1) + 1 = 3."
+            },
+            {
+              "question": "How does the extended Hamming (8,4) code provide SEC-DED (Single Error Correction, Double Error Detection)?",
+              "options": [
+                "By appending an overall parity bit P₀ covering all bits",
+                "By repeating the entire 7-bit codeword twice",
+                "By doubling the number of data bits",
+                "By using two separate syndrome decoders"
+              ],
+              "correct_index": 0,
+              "explanation": "Adding an overall parity bit (P₀) over the entire codeword increases d_min from 3 to 4, enabling the decoder to distinguish single-bit errors from double-bit errors."
+            },
+            {
+              "question": "Given 4 data bits [D₃=1, D₅=0, D₆=1, D₇=1] with even parity, what is the value of parity bit P₁ (P₁ = D₃ ⊕ D₅ ⊕ D₇)?",
+              "options": [
+                "0",
+                "1",
+                "Undefined",
+                "2"
+              ],
+              "correct_index": 0,
+              "explanation": "P₁ = 1 ⊕ 0 ⊕ 1 = 0. Even parity ensures an even total number of 1s in the set {P₁, D₃, D₅, D₇}."
             }
           ]
         }
@@ -376,7 +508,7 @@
             "Boolean Algebra",
             "Axioms"
           ],
-          "content_markdown": "### Fundamental Boolean Theorems\n\n#### 1. Fundamental Laws:\n* **Identity:** `A · 1 = A`, `A + 0 = A`\n* **Annihilator:** `A · 0 = 0`, `A + 1 = 1`\n* **Idempotence:** `A · A = A`, `A + A = A`\n* **Complement:** `A · A̅ = 0`, `A + A̅ = 1`\n* **Absorption:** `A + (A · B) = A`\n* **Involution (Double Negation):** `(A̅)̅ = A`\n\n#### 2. De Morgan's Theorems:\n> 📐 `(A · B)̅ = A̅ + B̅`\n> 📐 `(A + B)̅ = A̅ · B̅`\n\nDe Morgan's theorem states that inverting the result of an AND/OR operation is mathematically equivalent to applying the dual operator to individually inverted inputs.",
+          "content_markdown": "### Fundamental Boolean Theorems & De Morgan's Laws\n\nBoolean algebra is the algebraic structure governing two-valued digital logic systems, formalized by George Boole and Claude Shannon.\n\n#### 1. Core Boolean Axioms & Laws:\n* **Identity Law:** $A \\cdot 1 = A, \\quad A + 0 = A$\n* **Null / Annihilator Law:** $A \\cdot 0 = 0, \\quad A + 1 = 1$\n* **Idempotent Law:** $A \\cdot A = A, \\quad A + A = A$\n* **Complement Law:** $A \\cdot \\overline{A} = 0, \\quad A + \\overline{A} = 1$\n* **Involution Law (Double Negation):** $\\overline{\\overline{A}} = A$\n* **Absorption Law:** $A + (A \\cdot B) = A, \\quad A \\cdot (A + B) = A$\n* **Consensus Theorem:** $A B + \\overline{A} C + B C = A B + \\overline{A} C$ (redundant term $B C$ is eliminated!)\n\n#### 2. De Morgan's Theorems:\nDe Morgan's laws state that the complement of a logic conjunction/disjunction equals the dual disjunction/conjunction of the individual complements:\n> 📐 $\\overline{A \\cdot B} = \\overline{A} + \\overline{B}$\n> 📐 $\\overline{A + B} = \\overline{A} \\cdot \\overline{B}$\n\n#### 3. Principle of Duality:\nAny true Boolean identity remains valid if:\n1. All AND $(\\cdot)$ operators are swapped with OR $(+)$ operators.\n2. All identity elements $0$ and $1$ are swapped.",
           "action_link": {
             "type": "boolean",
             "label": "Analyze De Morgan Theorem in Solver",
@@ -385,15 +517,59 @@
           },
           "quiz": [
             {
-              "question": "What is the De Morgan equivalent of !(A + B)?",
+              "question": "What is the simplified form of the Boolean expression A + (!A · B)?",
               "options": [
-                "!A & !B",
-                "!A | !B",
-                "A & B",
-                "!(A & B)"
+                "A + B",
+                "A · B",
+                "!A + B",
+                "A"
               ],
               "correct_index": 0,
-              "explanation": "!(A + B) transforms the OR into AND with each literal inverted: !A & !B."
+              "explanation": "Using the distributive rule: A + (!A · B) = (A + !A) · (A + B) = 1 · (A + B) = A + B."
+            },
+            {
+              "question": "According to De Morgan's theorem, what is the equivalent of the expression !(A + B + C)?",
+              "options": [
+                "!A · !B · !C",
+                "!A + !B + !C",
+                "!(A · B · C)",
+                "A · B · C"
+              ],
+              "correct_index": 0,
+              "explanation": "De Morgan's theorem converts an inverted OR sum into the product of individual inverted literals: !(A + B + C) = !A · !B · !C."
+            },
+            {
+              "question": "Which redundant term can be eliminated from AB + !A·C + BC according to the Consensus Theorem?",
+              "options": [
+                "BC",
+                "AB",
+                "!A·C",
+                "None; all terms are essential"
+              ],
+              "correct_index": 0,
+              "explanation": "In AB + !A·C + BC, the consensus of AB and !A·C is BC, making the BC term completely redundant."
+            },
+            {
+              "question": "What is the dual of the Boolean equation A · (B + 0) = A · B?",
+              "options": [
+                "A + (B · 1) = A + B",
+                "A · (B · 1) = A + B",
+                "!A + (!B · 0) = !A + !B",
+                "A + (B + 1) = A · B"
+              ],
+              "correct_index": 0,
+              "explanation": "To obtain the dual: replace all · with +, replace all + with ·, and swap 0 and 1. Thus A · (B + 0) = A · B becomes A + (B · 1) = A + B."
+            },
+            {
+              "question": "What is the result of the Boolean absorption law A · (A + B)?",
+              "options": [
+                "A",
+                "B",
+                "A + B",
+                "A · B"
+              ],
+              "correct_index": 0,
+              "explanation": "By absorption: A · (A + B) = (A · A) + (A · B) = A + A·B = A · (1 + B) = A · 1 = A."
             }
           ]
         },
@@ -409,7 +585,7 @@
             "Prime Implicants",
             "SOP"
           ],
-          "content_markdown": "### Karnaugh Map Minimization\n\nA **Karnaugh Map (K-Map)** arranges minterms in a multidimensional Gray-code grid so that adjacent cells differ by only one boolean literal.\n\n#### Grouping Rules:\n1. Groups must contain a power of two cells (`1, 2, 4, 8, 16`).\n2. Groups must be rectangular.\n3. Wrap-around edges are adjacent (toroidal topology: column 0 wraps to column 3, row 0 wraps to row 3).\n4. Essential Prime Implicants (EPIs) contain at least one minterm not covered by any other group.\n5. Don't-Care cells (`X`) can be treated as `1` to form larger groups or `0` to avoid redundant terms.",
+          "content_markdown": "### Karnaugh Map (K-Map) Minimization\n\nA **Karnaugh Map (K-Map)** is a graphical optimization tool that arranges minterms into a multidimensional Gray-code grid where geometrically adjacent cells differ in only a single Boolean literal.\n\n#### 1. Gray Code Cell Ordering:\nThe coordinates along rows and columns follow Gray code sequence: `00, 01, 11, 10`. This ensures that adjacent cells (including wrap-around boundary cells) share all literals except one.\n\n#### 2. Grouping (Implicant) Rules:\n* **Size Constraint:** Group sizes must strictly be powers of two ($1, 2, 4, 8, 16$).\n* **Geometry:** Groups must be rectangular or square (no diagonals or L-shapes).\n* **Toroidal Adjacency:** The top row is adjacent to the bottom row; the leftmost column is adjacent to the rightmost column. The 4 corner cells form a valid group of 4!\n* **Variable Reduction Rule:** A group of size $2^k$ in an $n$-variable map eliminates $k$ variables and yields a product term with $n - k$ literals.\n\n#### 3. Prime Implicants vs. Essential Prime Implicants:\n* **Prime Implicant (PI):** A maximal group of 1s that cannot be merged into any larger power-of-two group.\n* **Essential Prime Implicant (EPI):** A Prime Implicant containing at least one `1` minterm that is not covered by any other prime implicant.\n* **Don't-Care Conditions ($X$):** Can be included in groups as `1` to expand group sizes, or treated as `0` if they do not help.",
           "action_link": {
             "type": "boolean",
             "label": "Solve 4-Variable K-Map in BaseLogic",
@@ -426,7 +602,51 @@
                 "4 literals"
               ],
               "correct_index": 0,
-              "explanation": "A group of size 2ᵏ eliminates k variables. For group size 4 = 2², exactly 2 literals are eliminated."
+              "explanation": "A group of size 2ᵏ eliminates k variables. For group size 4 = 2², exactly 2 variables are eliminated, leaving 4 - 2 = 2 literals."
+            },
+            {
+              "question": "Why do row and column headers in a K-Map follow Gray Code sequence (00, 01, 11, 10) instead of binary (00, 01, 10, 11)?",
+              "options": [
+                "To ensure adjacent cells differ by only one variable bit transition",
+                "To make the map look symmetrical",
+                "To allow faster binary division",
+                "To automatically eliminate don't-care conditions"
+              ],
+              "correct_index": 0,
+              "explanation": "Gray code ensures unit Hamming distance between adjacent cells, allowing algebraic combination of terms using A + !A = 1."
+            },
+            {
+              "question": "In a 4-variable K-Map, what group can be formed by minterms m₀, m₂, m₈, and m₁₀ located at the 4 outer corners?",
+              "options": [
+                "A single valid rectangular group of 4 cells",
+                "Four separate isolated groups of 1 cell each",
+                "Two separate groups of 2 cells each",
+                "Corner cells cannot be grouped together"
+              ],
+              "correct_index": 0,
+              "explanation": "Due to the toroidal wrap-around adjacency in both horizontal and vertical directions, the four corner cells (0, 2, 8, 10) form a single valid group of 4."
+            },
+            {
+              "question": "What defines an Essential Prime Implicant (EPI)?",
+              "options": [
+                "A Prime Implicant that covers at least one minterm not covered by any other Prime Implicant",
+                "The group with the largest number of 1s",
+                "A group containing only don't-care conditions",
+                "A group that covers all 16 cells of the map"
+              ],
+              "correct_index": 0,
+              "explanation": "An EPI is mandatory in the minimal Sum-of-Products because it is the unique cover for at least one minterm."
+            },
+            {
+              "question": "How should 'Don't-Care' (X) terms be utilized during K-Map grouping?",
+              "options": [
+                "Treated as 1 if they help enlarge a group, or ignored (0) if they do not",
+                "Always treated as 1 in all groups",
+                "Always treated as 0 and never grouped",
+                "Grouped only with other X terms"
+              ],
+              "correct_index": 0,
+              "explanation": "Don't-care terms provide design flexibility: assign them 1 to maximize group size (fewer literals) or 0 to avoid unnecessary terms."
             }
           ]
         },
@@ -442,7 +662,7 @@
             "Petrick's Method",
             "Tabular"
           ],
-          "content_markdown": "### Quine-McCluskey Method\n\nFor complex functions with 4 to 6+ variables, the **Quine-McCluskey (QM)** algorithm provides exact, automated tabular minimization:\n\n#### Step-by-Step Algorithm:\n1. **Hamming Weight Partitioning:** Group minterms by count of 1-bits.\n2. **Systematic Column Merging:** Compare terms between adjacent groups differing in exactly one position, replacing varying bits with dashes (`-`).\n3. **Prime Implicant Table:** Unmerged terms form Prime Implicants (PIs).\n4. **Essential PI Extraction:** Identify columns covered by only one PI.\n5. **Branch & Bound Set Cover:** Find the minimal term and minimal literal solution for remaining minterms.",
+          "content_markdown": "### Quine-McCluskey (QM) Tabular Reduction\n\nWhen dealing with 5 or more variables where manual visual K-Map grouping becomes error-prone, the **Quine-McCluskey (Tabular) Method** provides a deterministic algorithmic procedure suitable for software ALUs and synthesis tools.\n\n#### 1. Phase 1: Finding Prime Implicants\n1. **Group by Hamming Weight:** Partition minterms and don't-cares into groups based on the count of 1s in their binary representations.\n2. **Column Reduction:** Compare minterms from group $i$ with group $i+1$. If two terms differ in exactly **one bit position**, combine them and replace that position with a dash (`-`).\n3. **Iterate:** Repeat merging on the newly formed terms until no further combinations can be made.\n4. **Collect Prime Implicants (PIs):** Any term that could not be merged with another term is marked as a Prime Implicant.\n\n#### 2. Phase 2: Prime Implicant Chart & Petrick's Method\n1. Construct a chart with PIs as rows and original required minterms (excluding don't-cares) as columns.\n2. **Identify Essential Prime Implicants (EPIs):** A column with only one checkmark ($\\times$) indicates an EPI. Include this PI in the final solution and remove all minterm columns it covers.\n3. **Chart Reductions:** Apply row dominance (elimination of more expensive PIs) and column dominance.\n4. **Petrick's Method:** If cyclic dependencies remain, write a POS expression of covers, expand to SOP using Boolean distribution, and pick the product term with minimum PIs and minimum total literals.",
           "action_link": {
             "type": "boolean",
             "label": "Run Quine-McCluskey on Full Adder Carry",
@@ -451,15 +671,59 @@
           },
           "quiz": [
             {
-              "question": "What is an Essential Prime Implicant (EPI) in a Quine-McCluskey coverage table?",
+              "question": "What is the primary condition required to merge two terms in Quine-McCluskey Column Reduction?",
               "options": [
-                "A Prime Implicant that is the sole cover for at least one minterm column",
-                "A Prime Implicant with no don't-cares",
-                "The largest group in the table",
-                "A term that covers all minterms simultaneously"
+                "They must differ in exactly one bit position with identical dash (-) placements",
+                "They must have the exact same number of 1s",
+                "They must be adjacent in standard binary numerical order",
+                "They must both be power-of-two minterms"
               ],
               "correct_index": 0,
-              "explanation": "An EPI is mandatory because at least one minterm cannot be covered by any other prime implicant."
+              "explanation": "Two terms can be combined into a higher-order implicant if and only if their dashes match and their binary bits differ in exactly one position (Hamming distance = 1)."
+            },
+            {
+              "question": "What is an Essential Prime Implicant (EPI) in a Quine-McCluskey coverage chart?",
+              "options": [
+                "A Prime Implicant that is the sole cover for at least one minterm column",
+                "A Prime Implicant that covers all minterms in the table",
+                "The Prime Implicant with the fewest number of dashes",
+                "A term composed exclusively of don't-care conditions"
+              ],
+              "correct_index": 0,
+              "explanation": "An EPI is required in any valid minimal cover because at least one minterm column has a single checkmark provided only by that PI."
+            },
+            {
+              "question": "Why are 'Don't-Care' minterms included in Phase 1 (PI generation) but excluded from the columns of the Phase 2 coverage chart?",
+              "options": [
+                "They help form larger PIs with fewer literals, but do not require mandatory coverage in the final output",
+                "They are converted to zeros in Phase 2",
+                "They cause cyclic deadlocks in Petrick's method",
+                "Don't-cares cannot be represented in binary format"
+              ],
+              "correct_index": 0,
+              "explanation": "Don't-cares can be freely leveraged to enlarge implicants during Phase 1, but since their output is optional, they do not need dedicated coverage columns in Phase 2."
+            },
+            {
+              "question": "When is Petrick's Method employed in the Quine-McCluskey minimization workflow?",
+              "options": [
+                "When the prime implicant chart cannot be fully reduced using essential prime implicants and row/column dominance",
+                "Before grouping minterms by Hamming weight",
+                "To convert binary numbers into Gray code",
+                "To synthesize circuits using only NAND gates"
+              ],
+              "correct_index": 0,
+              "explanation": "Petrick's method is a branch-and-bound algebraic technique used to solve cyclic (non-reducible) Prime Implicant tables."
+            },
+            {
+              "question": "In QM notation, what does the implicant representation '1-01' signify for variables (A, B, C, D)?",
+              "options": [
+                "A · !C · D",
+                "A · B · !C · D",
+                "!A · C · !D",
+                "A + !C + D"
+              ],
+              "correct_index": 0,
+              "explanation": "'1-01' corresponds to A=1, B=dash (eliminated variable), C=0 (!C), and D=1 (D), giving product term A · !C · D."
             }
           ]
         }
@@ -484,7 +748,7 @@
             "Tied-Input Inverter",
             "De Morgan"
           ],
-          "content_markdown": "### Universal Logic Gates\n\nNAND and NOR gates are classified as **universal logic gates** because any Boolean function can be implemented using exclusively one gate type.\n\n#### 1. Inverter Realization (Tied-Input Gate)\nTo form a NOT inverter using only a universal gate, tie all inputs together:\n* **NAND Inverter:** `(A · A)̅ = A̅`\n* **NOR Inverter:** `(A + A)̅ = A̅`\n\n#### 2. Two-Level Transformation Proof:\n* **NAND-NAND from SOP:** Apply involution and De Morgan to flat SOP:\n  > 📐 `F = AB + CD = ((AB + CD)̅)̅ = ((AB)̅ · (CD)̅)̅`\n* **NOR-NOR from POS:** Apply involution and De Morgan to flat POS:\n  > 📐 `F = (A+B)(C+D) = (((A+B)(C+D))̅)̅ = ((A+B)̅ + (C+D)̅)̅`\n\n#### 3. Strict Hardware Rules:\nXOR and XNOR gates are primary logic gates strictly designed to accept only **two binary inputs** and produce one output.",
+          "content_markdown": "### Universal Logic Gate Synthesis (NAND & NOR)\n\nNAND and NOR gates are classified as **universal logic gates** because any arbitrary combinational or sequential Boolean circuit can be implemented exclusively using only NAND or only NOR gates.\n\n#### 1. Elementary Gate Realizations using NAND:\n* **NOT Inverter (1 NAND):** Tie both inputs together:\n  > $\\overline{A \\cdot A} = \\overline{A}$\n* **AND Gate (2 NANDs):** Invert NAND output with a tied-input NAND inverter:\n  > $\\overline{\\overline{A \\cdot B}} = A \\cdot B$\n* **OR Gate (3 NANDs):** Invert inputs before NANDing (De Morgan):\n  > $\\overline{\\overline{A} \\cdot \\overline{B}} = A + B$\n* **NOR Gate (4 NANDs):** Invert output of 3-NAND OR structure.\n* **XOR Gate (4 NANDs):** Efficient 4-gate synthesis:\n  > $A \\oplus B = \\overline{\\overline{A \\cdot \\overline{A \\cdot B}} \\cdot \\overline{B \\cdot \\overline{A \\cdot B}}}$\n\n#### 2. Elementary Gate Realizations using NOR:\n* **NOT Inverter (1 NOR):** $\\overline{A + A} = \\overline{A}$\n* **OR Gate (2 NORs):** $\\overline{\\overline{A + B}} = A + B$\n* **AND Gate (3 NORs):** $\\overline{\\overline{A} + \\overline{B}} = A \\cdot B$\n* **NAND Gate (4 NORs):** Invert output of 3-NOR AND structure.\n* **XNOR Gate (4 NORs):** Dual 4-gate synthesis.\n\n#### 3. Two-Level Universal Transformation Proof:\n* **NAND-NAND from SOP:** Double invert flat Sum-of-Products:\n  > $F = A B + C D = \\overline{\\overline{A B + C D}} = \\overline{\\overline{A B} \\cdot \\overline{C D}}$\n* **NOR-NOR from POS:** Double invert flat Product-of-Sums:\n  > $F = (A+B)(C+D) = \\overline{\\overline{(A+B)(C+D)}} = \\overline{\\overline{A+B} + \\overline{C+D}}$",
           "action_link": {
             "type": "circuit",
             "label": "Synthesize NAND Full Adder in Circuit Designer",
@@ -493,15 +757,59 @@
           },
           "quiz": [
             {
-              "question": "How is an inverter formed using a 2-input NOR gate?",
+              "question": "How is a NOT inverter constructed using a single 2-input NAND gate?",
               "options": [
-                "Tie both inputs together to the input signal (A + A)' = A'",
+                "Tie both inputs together to the common input signal A",
                 "Connect one input to Ground (0)",
-                "Connect one input to VCC (1)",
-                "NOR gates cannot function as inverters"
+                "Connect one input to VCC (1) and leave the other floating",
+                "NAND gates cannot function as inverters"
               ],
               "correct_index": 0,
-              "explanation": "Connecting both inputs together yields (A + A)' = A', realizing a clean NOT gate."
+              "explanation": "Connecting both inputs to A yields !(A · A) = !A, creating a NOT inverter."
+            },
+            {
+              "question": "What is the minimum number of 2-input NAND gates required to implement a 2-input XOR gate?",
+              "options": [
+                "4 NAND gates",
+                "3 NAND gates",
+                "5 NAND gates",
+                "6 NAND gates"
+              ],
+              "correct_index": 0,
+              "explanation": "A standard 2-input XOR function (A ⊕ B) can be synthesized with exactly 4 two-input NAND gates."
+            },
+            {
+              "question": "How is a 2-input OR gate realized using only 2-input NAND gates?",
+              "options": [
+                "Invert both inputs using 2 NAND inverters, then feed into a 3rd NAND gate",
+                "Feed inputs into a single NAND gate",
+                "Connect two NAND gates in series",
+                "Tie inputs together with resistors"
+              ],
+              "correct_index": 0,
+              "explanation": "By De Morgan's law, A + B = !(!A · !B). Inverting A and B requires 2 NAND inverters, and the 3rd NAND performs !(!A · !B)."
+            },
+            {
+              "question": "What circuit transformation allows a standard Sum-of-Products (SOP) expression to be implemented directly using a two-level NAND-NAND circuit?",
+              "options": [
+                "Applying double negation (involution) and De Morgan's theorem",
+                "Converting SOP to POS form first",
+                "Replacing all AND gates with XOR gates",
+                "Adding pull-up resistors to all gates"
+              ],
+              "correct_index": 0,
+              "explanation": "Applying double inversion: F = AB + CD = !(!((AB) + (CD))) = !(!(AB) · !(CD)), which maps directly to first-level NANDs feeding into a second-level NAND."
+            },
+            {
+              "question": "How is a 2-input AND gate constructed using only 2-input NOR gates?",
+              "options": [
+                "Invert inputs with 2 NOR inverters, then feed into a 3rd NOR gate",
+                "Connect a single NOR gate output to ground",
+                "Connect 2 NOR gates in parallel",
+                "NOR gates cannot produce an AND operation"
+              ],
+              "correct_index": 0,
+              "explanation": "By De Morgan's law, A · B = !(!A + !B). Inverting A and B with 2 NOR gates and feeding them to a 3rd NOR yields !(!A + !B) = A · B."
             }
           ]
         },
@@ -517,7 +825,7 @@
             "Clock",
             "Ripple Counter"
           ],
-          "content_markdown": "### Sequential Logic Circuits\n\nUnlike combinational logic (where outputs depend solely on present inputs), **sequential logic** incorporates memory feedback governed by a periodic clock signal.\n\n#### Flip-Flop Types:\n* **D Flip-Flop (Data):** Captures input D on the active clock edge: `Q_next = D`.\n* **T Flip-Flop (Toggle):** Toggles state when T = 1: `Q_next = T ⊕ Q`.\n* **JK Flip-Flop:** Universal sequential element (`J=1, K=0` → Set; `J=0, K=1` → Reset; `J=1, K=1` → Toggle).\n\n#### Asynchronous Ripple Counters:\nChaining N toggle flip-flops in series where Qᵢ clocks the next stage creates an N-bit binary divider (2ⁿ states).",
+          "content_markdown": "### Sequential Logic, Flip-Flops & Counters\n\nWhile combinational circuits produce outputs determined solely by current inputs, **sequential circuits** contain memory elements whose outputs depend on both current inputs and the stored historical state.\n\n#### 1. Latches vs. Flip-Flops:\n* **Latches (Level-Sensitive):** Transparent and react immediately whenever the enable clock signal is high (or low).\n* **Flip-Flops (Edge-Triggered):** State transitions occur strictly on the instantaneous transition edge (rising $\\uparrow$ or falling $\\downarrow$) of the clock signal.\n\n#### 2. Core Flip-Flop Characteristics:\n* **D Flip-Flop (Data / Delay):**\n  * Characteristic Equation: $Q_{next} = D$\n  * Captures $D$ on the active clock edge.\n* **T Flip-Flop (Toggle):**\n  * Characteristic Equation: $Q_{next} = T \\oplus Q = T\\overline{Q} + \\overline{T}Q$\n  * Toggles state when $T = 1$; holds state when $T = 0$.\n* **JK Flip-Flop (Universal Sequential Cell):**\n  * Characteristic Equation: $Q_{next} = J\\overline{Q} + \\overline{K}Q$\n  * $J=0, K=0 \\rightarrow$ Hold; $J=0, K=1 \\rightarrow$ Reset (0); $J=1, K=0 \\rightarrow$ Set (1); $J=1, K=1 \\rightarrow$ Toggle ($overline{Q}$).\n* **SR Latch:** $S=1, R=0 \\rightarrow$ Set; $S=0, R=1 \\rightarrow$ Reset; $S=1, R=1 \\rightarrow$ **Forbidden / Invalid State**.\n\n#### 3. Asynchronous vs. Synchronous Binary Counters:\n* **Asynchronous (Ripple) Counter:** The output $Q_i$ of each toggle flip-flop acts as the clock input for stage $i+1$. Has simpler wiring, but accumulates propagation delay across stages.\n* **Synchronous Counter:** All flip-flop stages share the exact same global clock pulse, with next-state logic driven by AND gates to ensure simultaneous transitions without ripple lag.",
           "action_link": {
             "type": "circuit",
             "label": "Open Flip-Flop Counter in Designer",
@@ -526,15 +834,59 @@
           },
           "quiz": [
             {
-              "question": "What is the next state Qₙₑₓₜ of a JK Flip-Flop when both J = 1 and K = 1 on a clock pulse?",
+              "question": "What is the next state Qₙₑₓₜ of a JK Flip-Flop when both J = 1 and K = 1 on an active clock pulse?",
               "options": [
-                "Toggle (Q' or not Q)",
+                "Toggle (invert current state: !Q)",
                 "Set to 1",
                 "Reset to 0",
-                "Undefined / Race Condition"
+                "Undefined / Forbidden State"
               ],
               "correct_index": 0,
-              "explanation": "When J = 1 and K = 1, the JK flip-flop toggles its output state on every active clock edge."
+              "explanation": "When J = 1 and K = 1, the JK flip-flop toggles its output state on every active clock edge, resolving the invalid state of basic SR latches."
+            },
+            {
+              "question": "What is the key difference between a Latch and an Edge-Triggered Flip-Flop?",
+              "options": [
+                "Latches are level-sensitive (transparent during active level), while flip-flops update only on instantaneous clock edges",
+                "Latches have clock inputs while flip-flops do not",
+                "Flip-flops can only store negative numbers",
+                "Latches require 8 transistors while flip-flops require only 1"
+              ],
+              "correct_index": 0,
+              "explanation": "Latches remain transparent throughout the duration of an enable pulse, whereas edge-triggered flip-flops sample data and update state only at clock edge transitions."
+            },
+            {
+              "question": "What is the characteristic Boolean equation of a D Flip-Flop?",
+              "options": [
+                "Q_next = D",
+                "Q_next = D ⊕ Q",
+                "Q_next = D · Q",
+                "Q_next = !D"
+              ],
+              "correct_index": 0,
+              "explanation": "A D flip-flop transfers the exact logic value on data input D to output Q on the active clock edge: Q_next = D."
+            },
+            {
+              "question": "Why does an asynchronous ripple counter suffer from speed limitations at high frequencies?",
+              "options": [
+                "Clock signals cascade sequentially through each flip-flop, accumulating cumulative propagation delays",
+                "It consumes too much static memory",
+                "It can only count down rather than up",
+                "The flip-flops overheat when clocked in parallel"
+              ],
+              "correct_index": 0,
+              "explanation": "In a ripple counter, each stage is clocked by the preceding stage's output. These sequential propagation delays add up, causing transient glitches and limiting maximum clock speed."
+            },
+            {
+              "question": "How many flip-flops are required to construct a modulo-16 (Mod-16) binary ripple counter?",
+              "options": [
+                "4 flip-flops",
+                "8 flip-flops",
+                "16 flip-flops",
+                "2 flip-flops"
+              ],
+              "correct_index": 0,
+              "explanation": "A counter with n flip-flops counts 2ⁿ distinct states (from 0 to 2ⁿ - 1). For Mod-16 (16 states), n = log₂(16) = 4 flip-flops."
             }
           ]
         }
