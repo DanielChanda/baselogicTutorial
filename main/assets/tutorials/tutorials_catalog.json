@@ -31,9 +31,15 @@
           "media": [
             {
               "type": "link",
-              "title": "Number Systems Overview Reference",
+              "title": "Positional Numeral Systems Reference",
               "url": "https://en.wikipedia.org/wiki/Positional_notation",
-              "caption": "In-depth mathematical formulation of positional numeral systems."
+              "caption": "In-depth mathematical formulation of positional numeral systems and radices."
+            },
+            {
+              "type": "link",
+              "title": "Base and Radix Representation Overview",
+              "url": "https://www.electronics-tutorials.ws/binary/bin_1.html",
+              "caption": "Practical guide to binary, octal, decimal, and hexadecimal number systems."
             }
           ],
           "quiz": [
@@ -168,6 +174,20 @@
               "correct_index": 1,
               "explanation": "1101₂ equals 13 (D) and 1010₂ equals 10 (A), yielding DA₁₆."
             }
+          ],
+          "media": [
+            {
+              "type": "link",
+              "title": "Radix and Base Conversion Algorithms",
+              "url": "https://en.wikipedia.org/wiki/Radix",
+              "caption": "Mathematical methods for base conversion using polynomial evaluation and repeated Euclidean division."
+            },
+            {
+              "type": "link",
+              "title": "Binary, Octal and Hexadecimal Grouping Guide",
+              "url": "https://www.electronics-tutorials.ws/binary/bin_3.html",
+              "caption": "Visual guide to power-of-two bit grouping between binary, octal, and hexadecimal."
+            }
           ]
         },
         {
@@ -244,6 +264,20 @@
               ],
               "correct_index": 0,
               "explanation": "G₃ = B₃ = 1; G₂ = B₃ ⊕ B₂ = 1 ⊕ 1 = 0; G₁ = B₂ ⊕ B₁ = 1 ⊕ 0 = 1; G₀ = B₁ ⊕ B₀ = 0 ⊕ 0 = 0. Thus, the Gray Code is 1010₂."
+            }
+          ],
+          "media": [
+            {
+              "type": "link",
+              "title": "Reflected Binary Code (Gray Code)",
+              "url": "https://en.wikipedia.org/wiki/Gray_code",
+              "caption": "Principles of unit-distance reflected binary codes and rotary encoder applications."
+            },
+            {
+              "type": "link",
+              "title": "BCD 8421 & Self-Complementing Codes",
+              "url": "https://www.geeksforgeeks.org/digital-logic/code-converters-bcd8421-to-from-excess-3/",
+              "caption": "Code Converters - BCD(8421) to/from Excess-3"
             }
           ]
         }
@@ -331,6 +365,20 @@
               "correct_index": 0,
               "explanation": "For n = 8 bits, the two's complement range is from -2⁷ (-128) to +(2⁷ - 1) (+127)."
             }
+          ],
+          "media": [
+            {
+              "type": "link",
+              "title": "Two's Complement Binary Representation",
+              "url": "https://en.wikipedia.org/wiki/Two%27s_complement",
+              "caption": "Mathematical foundation of two's complement sign-magnitude representation and overflow detection."
+            },
+            {
+              "type": "link",
+              "title": "Binary Adder & Subtractor Circuits",
+              "url": "https://www.tutorialspoint.com/digital-electronics/digital-electronics-binary-adder-subtractor.htm",
+              "caption": "Hardware implementation of half adders, full adders, and ripple-carry subtractors."
+            }
           ]
         },
         {
@@ -408,6 +456,20 @@
               "correct_index": 0,
               "explanation": "Booth's algorithm runs for n cycles, where n is the word length of the multiplier (4 cycles for 4-bit operands)."
             }
+          ],
+          "media": [
+            {
+              "type": "link",
+              "title": "Booth's Multiplication Algorithm",
+              "url": "https://en.wikipedia.org/wiki/Booth%27s_multiplication_algorithm",
+              "caption": "Detailed step-by-step arithmetic description of Booth's signed multiplication algorithm."
+            },
+            {
+              "type": "link",
+              "title": "Hardware Implementation of Booth Multipliers",
+              "url": "https://www.geeksforgeeks.org/booths-multiplication-algorithm/",
+              "caption": "ALU register architecture and shift-and-add hardware walkthrough."
+            }
           ]
         },
         {
@@ -484,6 +546,20 @@
               ],
               "correct_index": 0,
               "explanation": "P₁ = 1 ⊕ 0 ⊕ 1 = 0. Even parity ensures an even total number of 1s in the set {P₁, D₃, D₅, D₇}."
+            }
+          ],
+          "media": [
+            {
+              "type": "link",
+              "title": "Hamming Error-Correcting Code",
+              "url": "https://en.wikipedia.org/wiki/Hamming_code",
+              "caption": "Mathematical theory of generator matrices, parity-check matrices, and syndrome decoding."
+            },
+            {
+              "type": "link",
+              "title": "Hamming (7,4) Code & SEC-DED Systems",
+              "url": "https://www.geeksforgeeks.org/hamming-code-in-computer-network/",
+              "caption": "Comprehensive guide to SEC-DED bit layouts, syndrome calculation, and error correction."
             }
           ]
         }
@@ -571,6 +647,20 @@
               "correct_index": 0,
               "explanation": "By absorption: A · (A + B) = (A · A) + (A · B) = A + A·B = A · (1 + B) = A · 1 = A."
             }
+          ],
+          "media": [
+            {
+              "type": "link",
+              "title": "Boolean Algebra Axioms & Theorems",
+              "url": "https://en.wikipedia.org/wiki/Boolean_algebra",
+              "caption": "Formal algebraic structure, identity laws, duality principle, and consensus theorems."
+            },
+            {
+              "type": "link",
+              "title": "De Morgan's Laws and Logic Simplification",
+              "url": "https://www.electronics-tutorials.ws/boolean/demorgan.html",
+              "caption": "Visual proofs, truth tables, and algebraic transformations using De Morgan's theorem."
+            }
           ]
         },
         {
@@ -648,6 +738,20 @@
               "correct_index": 0,
               "explanation": "Don't-care terms provide design flexibility: assign them 1 to maximize group size (fewer literals) or 0 to avoid unnecessary terms."
             }
+          ],
+          "media": [
+            {
+              "type": "link",
+              "title": "Karnaugh Map Minimization",
+              "url": "https://en.wikipedia.org/wiki/Karnaugh_map",
+              "caption": "Planar and toroidal Gray-code mapping for minimal Sum-of-Products (SOP) logic synthesis."
+            },
+            {
+              "type": "link",
+              "title": "K-Map Grouping Rules and Prime Implicants",
+              "url": "https://www.allaboutcircuits.com/textbook/digital/chpt-8/karnaugh-mapping/",
+              "caption": "Visual diagrams for 2, 3, and 4-variable K-maps with don't-care condition handling."
+            }
           ]
         },
         {
@@ -724,6 +828,20 @@
               ],
               "correct_index": 0,
               "explanation": "'1-01' corresponds to A=1, B=dash (eliminated variable), C=0 (!C), and D=1 (D), giving product term A · !C · D."
+            }
+          ],
+          "media": [
+            {
+              "type": "link",
+              "title": "Quine-McCluskey Algorithm",
+              "url": "https://en.wikipedia.org/wiki/Quine%E2%80%93McCluskey_algorithm",
+              "caption": "Tabular reduction algorithm for exact multi-variable Boolean minimization."
+            },
+            {
+              "type": "link",
+              "title": "Petrick's Method for Cyclic Prime Implicant Charts",
+              "url": "https://en.wikipedia.org/wiki/Petrick%27s_method",
+              "caption": "Branch-and-bound algebraic technique for finding minimum-cost logic covers."
             }
           ]
         }
@@ -811,6 +929,20 @@
               "correct_index": 0,
               "explanation": "By De Morgan's law, A · B = !(!A + !B). Inverting A and B with 2 NOR gates and feeding them to a 3rd NOR yields !(!A + !B) = A · B."
             }
+          ],
+          "media": [
+            {
+              "type": "link",
+              "title": "NAND Logic and Universal Synthesis",
+              "url": "https://en.wikipedia.org/wiki/NAND_logic",
+              "caption": "Formal proofs and gate configurations for synthesizing all elementary gates with NAND logic."
+            },
+            {
+              "type": "link",
+              "title": "Universal Logic Gates: NAND and NOR Implementation",
+              "url": "https://www.electronics-tutorials.ws/logic/universal-gates.html",
+              "caption": "Schematics and gate-count comparisons for two-level NAND and NOR circuit designs."
+            }
           ]
         },
         {
@@ -887,6 +1019,20 @@
               ],
               "correct_index": 0,
               "explanation": "A counter with n flip-flops counts 2ⁿ distinct states (from 0 to 2ⁿ - 1). For Mod-16 (16 states), n = log₂(16) = 4 flip-flops."
+            }
+          ],
+          "media": [
+            {
+              "type": "link",
+              "title": "Flip-Flops and Latches in Sequential Circuits",
+              "url": "https://en.wikipedia.org/wiki/Flip-flop_(electronics)",
+              "caption": "Comprehensive electronic theory of bistable multivibrators, SR, D, JK, and T flip-flops."
+            },
+            {
+              "type": "link",
+              "title": "Asynchronous and Synchronous Binary Counters",
+              "url": "https://www.allaboutcircuits.com/textbook/digital/chpt-11/asynchronous-counters/",
+              "caption": "Design, clocking, and propagation delay analysis of binary ripple and synchronous counters."
             }
           ]
         }
