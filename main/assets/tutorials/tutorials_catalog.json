@@ -1,6 +1,6 @@
 {
-  "version": "2.0.5",
-  "last_updated": "2026-10-12T09:53:13Z",
+  "version": "2.0.6",
+  "last_updated": "2026-10-12T10:05:47Z",
   "tracks": [
     {
       "id": "number_systems",
@@ -1065,40 +1065,40 @@
                 "8"
               ],
               "correct_index": 1,
-              "explanation": "Explanation: $2^n = 8$, so $n = \\log_2 8 = 3$ select lines."
+              "explanation": "2ⁿ = 8, so n = log₂(8) = 3 select lines."
             },
             {
-              "question": "**In the example $F(A,B,C) = \\sum m(1,2,6,7)$ on a 4:1 MUX with $A$, $B$ as selects, what goes on $I_2$ (select code $AB = 10$)?**",
+              "question": "In the example F(A,B,C) = Σm(1,2,6,7) on a 4:1 MUX with A and B as selects, what goes on I₂ (select code AB = 10)?",
               "options": [
-                "$C$",
-                "$\\overline{C}$",
+                "C",
+                "!C",
                 "0",
                 "1"
               ],
               "correct_index": 2,
-              "explanation": "Explanation: For $AB = 10$ the minterms are $m_4$ and $m_5$, and neither is in the function, so $F = 0$"
+              "explanation": "For AB = 10 the minterms are m₄ and m₅. Neither is in the function, so F = 0."
             },
             {
-              "question": "**In a plain 4-to-2 encoder, what happens if $D_1$ and $D_2$ are high at the same time?**",
+              "question": "In a plain 4-to-2 encoder, what happens if D₁ and D₂ are high at the same time?",
               "options": [
-                "**Output is 11, which looks like $D_3$**",
+                "Output is 11, which looks like D₃",
                 "Output is 00",
                 "Output is 10",
-                "It picks $D_2$ automatically"
+                "It picks D₂ automatically"
               ],
               "correct_index": 0,
-              "explanation": "$A_1 = D_2 + D_3 = 1$ and $A_0 = D_1 + D_3 = 1$, giving $11$."
+              "explanation": "A₁ = D₂ + D₃ = 1 and A₀ = D₁ + D₃ = 1, giving 11."
             },
             {
-              "question": "**What does the valid bit $V$ of a priority encoder indicate?**",
+              "question": "What does the valid bit V of a priority encoder indicate?",
               "options": [
                 "Which input has the highest priority",
-                "**At least one input is active, separating “$D_0$ active” from “nothing active”**",
+                "At least one input is active",
                 "The inputs have even parity",
                 "A double error was detected"
               ],
               "correct_index": 1,
-              "explanation": "Both cases output $00$, so $V = 1$ is the only way to tell them apart."
+              "explanation": "With only D₀ high the outputs are 00, and with no input high they are also 00. V = 1 tells the two cases apart."
             }
           ],
           "media": [
