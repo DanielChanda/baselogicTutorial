@@ -1,6 +1,6 @@
 {
-  "version": "2.0.3",
-  "last_updated": "2026-08-25T17:30:00Z",
+  "version": "2.0.4",
+  "last_updated": "2026-10-12T09:33:01Z",
   "tracks": [
     {
       "id": "number_systems",
@@ -58,11 +58,11 @@
               "question": "What is the decimal equivalent of the binary number 1010₂?",
               "options": [
                 "8",
+                "14",
                 "10",
-                "12",
-                "14"
+                "12"
               ],
-              "correct_index": 1,
+              "correct_index": 2,
               "explanation": "(1 × 2³) + (0 × 2²) + (1 × 2¹) + (0 × 2⁰) = 8 + 0 + 2 + 0 = 10."
             },
             {
@@ -80,11 +80,11 @@
               "question": "Which digit or letter represents the decimal value 15 in the hexadecimal system?",
               "options": [
                 "E",
-                "F",
                 "15",
-                "A"
+                "A",
+                "F"
               ],
-              "correct_index": 1,
+              "correct_index": 3,
               "explanation": "Hexadecimal uses digits 0–9 and letters A–F, where A=10, B=11, C=12, D=13, E=14, and F=15."
             },
             {
@@ -133,21 +133,21 @@
             {
               "question": "What is the octal equivalent of the binary number 110110₂ using 3-bit triplet grouping?",
               "options": [
-                "56₈",
-                "66₈",
                 "76₈",
-                "46₈"
+                "56₈",
+                "46₈",
+                "66₈"
               ],
-              "correct_index": 1,
+              "correct_index": 3,
               "explanation": "Grouping the binary bits into 3-bit triplets gives 110₂ = 6 and 110₂ = 6, resulting in 66₈."
             },
             {
               "question": "What is the remainder of 29 divided by 2 during the first step of converting 29₁₀ to binary via repeated division?",
               "options": [
-                "0",
-                "1",
                 "2",
-                "14"
+                "1",
+                "14",
+                "0"
               ],
               "correct_index": 1,
               "explanation": "29 ÷ 2 = 14 with a remainder of 1, which represents the Least Significant Bit (LSB)."
@@ -155,23 +155,23 @@
             {
               "question": "When converting a binary number to octal, how many bits are grouped together into each triplet?",
               "options": [
-                "2 bits",
                 "3 bits",
-                "4 bits",
-                "8 bits"
+                "2 bits",
+                "8 bits",
+                "4 bits"
               ],
-              "correct_index": 1,
+              "correct_index": 0,
               "explanation": "Since 2³ = 8, binary digits are grouped into 3-bit chunks from the radix point."
             },
             {
               "question": "What is the hexadecimal equivalent of the binary number 1101 1010₂ using 4-bit nibble grouping?",
               "options": [
                 "CA₁₆",
-                "DA₁₆",
                 "EA₁₆",
-                "FA₁₆"
+                "FA₁₆",
+                "DA₁₆"
               ],
-              "correct_index": 1,
+              "correct_index": 3,
               "explanation": "1101₂ equals 13 (D) and 1010₂ equals 10 (A), yielding DA₁₆."
             }
           ],
@@ -213,12 +213,12 @@
             {
               "question": "Why is Gray Code preferred in mechanical rotary encoders?",
               "options": [
-                "Only 1 bit changes at a time, preventing transition race glitches",
                 "It uses fewer wires than standard binary",
+                "It allows direct multiplication by 3",
                 "It can store negative numbers without signs",
-                "It allows direct multiplication by 3"
+                "Only 1 bit changes at a time, preventing transition race glitches"
               ],
-              "correct_index": 0,
+              "correct_index": 3,
               "explanation": "Because only a single bit changes between adjacent values, asynchronous mechanical sensor bounce cannot produce invalid intermediate states."
             },
             {
@@ -235,10 +235,10 @@
             {
               "question": "What is the Excess-3 code representation for the decimal digit 5?",
               "options": [
-                "0101₂",
+                "0110₂",
                 "1000₂",
-                "0011₂",
-                "0110₂"
+                "0101₂",
+                "0011₂"
               ],
               "correct_index": 1,
               "explanation": "Excess-3 adds 3 to the decimal digit before encoding into binary: 5 + 3 = 8, which is 1000₂."
@@ -246,23 +246,23 @@
             {
               "question": "What mathematical property makes Excess-3 and Aiken 2421 codes 'self-complementing'?",
               "options": [
-                "Their 1's complement directly yields the 9's complement of the decimal digit",
-                "They can only represent even numbers",
                 "They invert the sign bit for negative numbers automatically",
-                "Their 2's complement equals zero"
+                "They can only represent even numbers",
+                "Their 2's complement equals zero",
+                "Their 1's complement directly yields the 9's complement of the decimal digit"
               ],
-              "correct_index": 0,
+              "correct_index": 3,
               "explanation": "In a self-complementing code, inverting every bit (1's complement) produces the exact encoding for (9 − digit), which is the 9's complement."
             },
             {
               "question": "Given binary 1100₂, what is its equivalent 4-bit Gray Code representation?",
               "options": [
-                "1010₂",
-                "1110₂",
                 "1000₂",
-                "0110₂"
+                "1010₂",
+                "0110₂",
+                "1110₂"
               ],
-              "correct_index": 0,
+              "correct_index": 1,
               "explanation": "G₃ = B₃ = 1; G₂ = B₃ ⊕ B₂ = 1 ⊕ 1 = 0; G₁ = B₂ ⊕ B₁ = 1 ⊕ 0 = 1; G₀ = B₁ ⊕ B₀ = 0 ⊕ 0 = 0. Thus, the Gray Code is 1010₂."
             }
           ],
@@ -313,21 +313,21 @@
             {
               "question": "What is the 8-bit Two's Complement representation of decimal -5?",
               "options": [
-                "1111 1011",
-                "1000 0101",
+                "1111 1101",
                 "1111 1010",
-                "1111 1101"
+                "1000 0101",
+                "1111 1011"
               ],
-              "correct_index": 0,
+              "correct_index": 3,
               "explanation": "+5 in 8-bit binary is 0000 0101. Inverting all bits gives 1111 1010 (1's complement), and adding 1 gives 1111 1011 (2's complement)."
             },
             {
               "question": "What are the logic equations for the Sum (S) and Carry-out (Cout) of a Full Adder with inputs A, B, and Cin?",
               "options": [
                 "S = A ⊕ B ⊕ Cin; Cout = (A · B) + (Cin · (A ⊕ B))",
+                "S = A + B + Cin; Cout = A ⊕ B ⊕ Cin",
                 "S = A · B · Cin; Cout = A + B + Cin",
-                "S = A ⊕ B; Cout = A · B",
-                "S = A + B + Cin; Cout = A ⊕ B ⊕ Cin"
+                "S = A ⊕ B; Cout = A · B"
               ],
               "correct_index": 0,
               "explanation": "A Full Adder computes Sum as three-way XOR (A ⊕ B ⊕ Cin) and generates Carry-out when at least two inputs are 1: (A · B) + Cin · (A ⊕ B)."
@@ -335,34 +335,34 @@
             {
               "question": "How is hardware binary subtraction (A - B) executed using a parallel adder?",
               "options": [
-                "Feed A and bitwise NOT of B into the adder with initial carry Cin = 1",
-                "Feed NOT of A and B with Cin = 0",
                 "Subtract bitwise without carry propagation",
-                "Multiply B by -1 with a shifter before adding"
+                "Feed A and bitwise NOT of B into the adder with initial carry Cin = 1",
+                "Multiply B by -1 with a shifter before adding",
+                "Feed NOT of A and B with Cin = 0"
               ],
-              "correct_index": 0,
+              "correct_index": 1,
               "explanation": "Since A - B = A + (~B + 1), inverting B with XOR gates and asserting Cin = 1 performs exact two's complement subtraction using standard adder circuitry."
             },
             {
               "question": "In an 8-bit signed two's complement system, what condition flags a signed arithmetic overflow (V)?",
               "options": [
-                "Carry-in to the MSB differs from Carry-out of the MSB (Cin ⊕ Cout = 1)",
-                "End carry out of the MSB equals 1 (Cout = 1)",
                 "The result ends with a 0 bit",
-                "Both operands are odd numbers"
+                "End carry out of the MSB equals 1 (Cout = 1)",
+                "Both operands are odd numbers",
+                "Carry-in to the MSB differs from Carry-out of the MSB (Cin ⊕ Cout = 1)"
               ],
-              "correct_index": 0,
+              "correct_index": 3,
               "explanation": "Signed overflow occurs if and only if the carry entering the sign bit does not match the carry leaving it: V = Cin(MSB) ⊕ Cout(MSB)."
             },
             {
               "question": "What is the representable integer range in an 8-bit signed two's complement format?",
               "options": [
-                "-128 to +127",
                 "-127 to +128",
-                "-256 to +255",
-                "0 to 255"
+                "0 to 255",
+                "-128 to +127",
+                "-256 to +255"
               ],
-              "correct_index": 0,
+              "correct_index": 2,
               "explanation": "For n = 8 bits, the two's complement range is from -2⁷ (-128) to +(2⁷ - 1) (+127)."
             }
           ],
@@ -404,34 +404,34 @@
             {
               "question": "What action does Booth's algorithm perform when inspecting bit-pair (Q₀, Q₋₁) = 10?",
               "options": [
-                "Subtract M from A (A = A - M), then SAR [A, Q, Q₋₁]",
                 "Add M to A (A = A + M), then SAR [A, Q, Q₋₁]",
                 "Only perform Arithmetic Shift Right (SAR)",
-                "Clear register A to zero"
+                "Clear register A to zero",
+                "Subtract M from A (A = A - M), then SAR [A, Q, Q₋₁]"
               ],
-              "correct_index": 0,
+              "correct_index": 3,
               "explanation": "The bit pattern 10 signifies the leading edge of a block of 1s, requiring subtracting the multiplicand (A = A - M) followed by an arithmetic shift right."
             },
             {
               "question": "What occurs during an Arithmetic Shift Right (SAR) on register bundle [A, Q, Q₋₁]?",
               "options": [
-                "The sign bit (MSB) of A is replicated/preserved while all bits shift right",
-                "A zero is shifted into the MSB of A",
                 "Register Q is rotated circularly into register A",
-                "Only register Q shifts right while register A remains unchanged"
+                "Only register Q shifts right while register A remains unchanged",
+                "The sign bit (MSB) of A is replicated/preserved while all bits shift right",
+                "A zero is shifted into the MSB of A"
               ],
-              "correct_index": 0,
+              "correct_index": 2,
               "explanation": "Arithmetic Shift Right preserves the sign of signed two's complement numbers by replicating the most significant bit (sign bit) of register A."
             },
             {
               "question": "What is the primary advantage of Booth's algorithm over standard unsigned shift-and-add multiplication?",
               "options": [
-                "It operates directly on signed two's complement numbers and reduces additions for contiguous 1s",
-                "It eliminates the need for any adder hardware",
                 "It can only multiply positive numbers",
-                "It computes the product in a single clock cycle without shifting"
+                "It operates directly on signed two's complement numbers and reduces additions for contiguous 1s",
+                "It computes the product in a single clock cycle without shifting",
+                "It eliminates the need for any adder hardware"
               ],
-              "correct_index": 0,
+              "correct_index": 1,
               "explanation": "Booth's algorithm natively handles positive and negative 2's complement operands and speeds up calculation when strings of 1s are encountered."
             },
             {
@@ -448,12 +448,12 @@
             {
               "question": "For two 4-bit numbers, how many shift-and-decision cycles does standard Booth's algorithm execute?",
               "options": [
-                "4 cycles",
-                "8 cycles",
                 "2 cycles",
-                "16 cycles"
+                "16 cycles",
+                "8 cycles",
+                "4 cycles"
               ],
-              "correct_index": 0,
+              "correct_index": 3,
               "explanation": "Booth's algorithm runs for n cycles, where n is the word length of the multiplier (4 cycles for 4-bit operands)."
             }
           ],
@@ -495,45 +495,45 @@
             {
               "question": "If a Hamming (7,4) decoder computes syndrome vector S = [1, 0, 1] (binary 5), which bit is erroneous?",
               "options": [
-                "Bit 5 (D₅)",
+                "No error occurred",
                 "Bit 1 (P₁)",
-                "Bit 7 (D₇)",
-                "No error occurred"
+                "Bit 5 (D₅)",
+                "Bit 7 (D₇)"
               ],
-              "correct_index": 0,
+              "correct_index": 2,
               "explanation": "Syndrome 101₂ = 5 in decimal. In Hamming code, the syndrome directly indicates the exact bit position containing the single-bit error."
             },
             {
               "question": "Where are the parity check bits positioned within a standard Hamming codeword?",
               "options": [
-                "Strictly at power-of-two bit positions (1, 2, 4, 8, ...)",
-                "At the beginning of the codeword only",
+                "At odd-numbered bit positions (1, 3, 5, 7, ...)",
                 "At the end of the codeword only",
-                "At odd-numbered bit positions (1, 3, 5, 7, ...)"
+                "At the beginning of the codeword only",
+                "Strictly at power-of-two bit positions (1, 2, 4, 8, ...)"
               ],
-              "correct_index": 0,
+              "correct_index": 3,
               "explanation": "Parity bits are placed at bit indices that are powers of 2 (1, 2, 4, 8, etc.) because each index has exactly one '1' in its binary position vector."
             },
             {
               "question": "What minimum Hamming distance (d_min) is required between codewords to achieve Single Error Correction (SEC)?",
               "options": [
-                "d_min = 3",
                 "d_min = 1",
+                "d_min = 3",
                 "d_min = 2",
                 "d_min = 4"
               ],
-              "correct_index": 0,
+              "correct_index": 1,
               "explanation": "To correct t errors, a code requires d_min ≥ 2t + 1. For single error correction (t = 1), d_min must be at least 2(1) + 1 = 3."
             },
             {
               "question": "How does the extended Hamming (8,4) code provide SEC-DED (Single Error Correction, Double Error Detection)?",
               "options": [
+                "By doubling the number of data bits",
                 "By appending an overall parity bit P₀ covering all bits",
                 "By repeating the entire 7-bit codeword twice",
-                "By doubling the number of data bits",
                 "By using two separate syndrome decoders"
               ],
-              "correct_index": 0,
+              "correct_index": 1,
               "explanation": "Adding an overall parity bit (P₀) over the entire codeword increases d_min from 3 to 4, enabling the decoder to distinguish single-bit errors from double-bit errors."
             },
             {
@@ -595,23 +595,23 @@
             {
               "question": "What is the simplified form of the Boolean expression A + (!A · B)?",
               "options": [
-                "A + B",
                 "A · B",
-                "!A + B",
-                "A"
+                "A + B",
+                "A",
+                "!A + B"
               ],
-              "correct_index": 0,
+              "correct_index": 1,
               "explanation": "Using the distributive rule: A + (!A · B) = (A + !A) · (A + B) = 1 · (A + B) = A + B."
             },
             {
               "question": "According to De Morgan's theorem, what is the equivalent of the expression !(A + B + C)?",
               "options": [
-                "!A · !B · !C",
-                "!A + !B + !C",
                 "!(A · B · C)",
+                "!A + !B + !C",
+                "!A · !B · !C",
                 "A · B · C"
               ],
-              "correct_index": 0,
+              "correct_index": 2,
               "explanation": "De Morgan's theorem converts an inverted OR sum into the product of individual inverted literals: !(A + B + C) = !A · !B · !C."
             },
             {
@@ -628,23 +628,23 @@
             {
               "question": "What is the dual of the Boolean equation A · (B + 0) = A · B?",
               "options": [
+                "A + (B + 1) = A · B",
                 "A + (B · 1) = A + B",
-                "A · (B · 1) = A + B",
                 "!A + (!B · 0) = !A + !B",
-                "A + (B + 1) = A · B"
+                "A · (B · 1) = A + B"
               ],
-              "correct_index": 0,
+              "correct_index": 1,
               "explanation": "To obtain the dual: replace all · with +, replace all + with ·, and swap 0 and 1. Thus A · (B + 0) = A · B becomes A + (B · 1) = A + B."
             },
             {
               "question": "What is the result of the Boolean absorption law A · (A + B)?",
               "options": [
-                "A",
-                "B",
                 "A + B",
-                "A · B"
+                "A · B",
+                "B",
+                "A"
               ],
-              "correct_index": 0,
+              "correct_index": 3,
               "explanation": "By absorption: A · (A + B) = (A · A) + (A · B) = A + A·B = A · (1 + B) = A · 1 = A."
             }
           ],
@@ -686,45 +686,45 @@
             {
               "question": "How many literals are eliminated when grouping 4 adjacent cells in a 4-variable K-Map?",
               "options": [
-                "2 literals",
-                "1 literal",
                 "3 literals",
-                "4 literals"
+                "1 literal",
+                "4 literals",
+                "2 literals"
               ],
-              "correct_index": 0,
+              "correct_index": 3,
               "explanation": "A group of size 2ᵏ eliminates k variables. For group size 4 = 2², exactly 2 variables are eliminated, leaving 4 - 2 = 2 literals."
             },
             {
               "question": "Why do row and column headers in a K-Map follow Gray Code sequence (00, 01, 11, 10) instead of binary (00, 01, 10, 11)?",
               "options": [
-                "To ensure adjacent cells differ by only one variable bit transition",
                 "To make the map look symmetrical",
                 "To allow faster binary division",
+                "To ensure adjacent cells differ by only one variable bit transition",
                 "To automatically eliminate don't-care conditions"
               ],
-              "correct_index": 0,
+              "correct_index": 2,
               "explanation": "Gray code ensures unit Hamming distance between adjacent cells, allowing algebraic combination of terms using A + !A = 1."
             },
             {
               "question": "In a 4-variable K-Map, what group can be formed by minterms m₀, m₂, m₈, and m₁₀ located at the 4 outer corners?",
               "options": [
-                "A single valid rectangular group of 4 cells",
-                "Four separate isolated groups of 1 cell each",
                 "Two separate groups of 2 cells each",
-                "Corner cells cannot be grouped together"
+                "Corner cells cannot be grouped together",
+                "Four separate isolated groups of 1 cell each",
+                "A single valid rectangular group of 4 cells"
               ],
-              "correct_index": 0,
+              "correct_index": 3,
               "explanation": "Due to the toroidal wrap-around adjacency in both horizontal and vertical directions, the four corner cells (0, 2, 8, 10) form a single valid group of 4."
             },
             {
               "question": "What defines an Essential Prime Implicant (EPI)?",
               "options": [
-                "A Prime Implicant that covers at least one minterm not covered by any other Prime Implicant",
                 "The group with the largest number of 1s",
                 "A group containing only don't-care conditions",
+                "A Prime Implicant that covers at least one minterm not covered by any other Prime Implicant",
                 "A group that covers all 16 cells of the map"
               ],
-              "correct_index": 0,
+              "correct_index": 2,
               "explanation": "An EPI is mandatory in the minimal Sum-of-Products because it is the unique cover for at least one minterm."
             },
             {
@@ -777,12 +777,12 @@
             {
               "question": "What is the primary condition required to merge two terms in Quine-McCluskey Column Reduction?",
               "options": [
-                "They must differ in exactly one bit position with identical dash (-) placements",
+                "They must both be power-of-two minterms",
                 "They must have the exact same number of 1s",
                 "They must be adjacent in standard binary numerical order",
-                "They must both be power-of-two minterms"
+                "They must differ in exactly one bit position with identical dash (-) placements"
               ],
-              "correct_index": 0,
+              "correct_index": 3,
               "explanation": "Two terms can be combined into a higher-order implicant if and only if their dashes match and their binary bits differ in exactly one position (Hamming distance = 1)."
             },
             {
@@ -799,12 +799,12 @@
             {
               "question": "Why are 'Don't-Care' minterms included in Phase 1 (PI generation) but excluded from the columns of the Phase 2 coverage chart?",
               "options": [
-                "They help form larger PIs with fewer literals, but do not require mandatory coverage in the final output",
+                "Don't-cares cannot be represented in binary format",
                 "They are converted to zeros in Phase 2",
-                "They cause cyclic deadlocks in Petrick's method",
-                "Don't-cares cannot be represented in binary format"
+                "They help form larger PIs with fewer literals, but do not require mandatory coverage in the final output",
+                "They cause cyclic deadlocks in Petrick's method"
               ],
-              "correct_index": 0,
+              "correct_index": 2,
               "explanation": "Don't-cares can be freely leveraged to enlarge implicants during Phase 1, but since their output is optional, they do not need dedicated coverage columns in Phase 2."
             },
             {
@@ -821,12 +821,12 @@
             {
               "question": "In QM notation, what does the implicant representation '1-01' signify for variables (A, B, C, D)?",
               "options": [
-                "A · !C · D",
-                "A · B · !C · D",
                 "!A · C · !D",
-                "A + !C + D"
+                "A · B · !C · D",
+                "A + !C + D",
+                "A · !C · D"
               ],
-              "correct_index": 0,
+              "correct_index": 3,
               "explanation": "'1-01' corresponds to A=1, B=dash (eliminated variable), C=0 (!C), and D=1 (D), giving product term A · !C · D."
             }
           ],
@@ -877,12 +877,12 @@
             {
               "question": "How is a NOT inverter constructed using a single 2-input NAND gate?",
               "options": [
-                "Tie both inputs together to the common input signal A",
                 "Connect one input to Ground (0)",
+                "Tie both inputs together to the common input signal A",
                 "Connect one input to VCC (1) and leave the other floating",
                 "NAND gates cannot function as inverters"
               ],
-              "correct_index": 0,
+              "correct_index": 1,
               "explanation": "Connecting both inputs to A yields !(A · A) = !A, creating a NOT inverter."
             },
             {
@@ -899,12 +899,12 @@
             {
               "question": "How is a 2-input OR gate realized using only 2-input NAND gates?",
               "options": [
-                "Invert both inputs using 2 NAND inverters, then feed into a 3rd NAND gate",
                 "Feed inputs into a single NAND gate",
                 "Connect two NAND gates in series",
+                "Invert both inputs using 2 NAND inverters, then feed into a 3rd NAND gate",
                 "Tie inputs together with resistors"
               ],
-              "correct_index": 0,
+              "correct_index": 2,
               "explanation": "By De Morgan's law, A + B = !(!A · !B). Inverting A and B requires 2 NAND inverters, and the 3rd NAND performs !(!A · !B)."
             },
             {
@@ -921,12 +921,12 @@
             {
               "question": "How is a 2-input AND gate constructed using only 2-input NOR gates?",
               "options": [
-                "Invert inputs with 2 NOR inverters, then feed into a 3rd NOR gate",
-                "Connect a single NOR gate output to ground",
                 "Connect 2 NOR gates in parallel",
+                "Connect a single NOR gate output to ground",
+                "Invert inputs with 2 NOR inverters, then feed into a 3rd NOR gate",
                 "NOR gates cannot produce an AND operation"
               ],
-              "correct_index": 0,
+              "correct_index": 2,
               "explanation": "By De Morgan's law, A · B = !(!A + !B). Inverting A and B with 2 NOR gates and feeding them to a 3rd NOR yields !(!A + !B) = A · B."
             }
           ],
@@ -979,43 +979,43 @@
             {
               "question": "What is the key difference between a Latch and an Edge-Triggered Flip-Flop?",
               "options": [
-                "Latches are level-sensitive (transparent during active level), while flip-flops update only on instantaneous clock edges",
                 "Latches have clock inputs while flip-flops do not",
                 "Flip-flops can only store negative numbers",
+                "Latches are level-sensitive (transparent during active level), while flip-flops update only on instantaneous clock edges",
                 "Latches require 8 transistors while flip-flops require only 1"
               ],
-              "correct_index": 0,
+              "correct_index": 2,
               "explanation": "Latches remain transparent throughout the duration of an enable pulse, whereas edge-triggered flip-flops sample data and update state only at clock edge transitions."
             },
             {
               "question": "What is the characteristic Boolean equation of a D Flip-Flop?",
               "options": [
-                "Q_next = D",
                 "Q_next = D ⊕ Q",
                 "Q_next = D · Q",
+                "Q_next = D",
                 "Q_next = !D"
               ],
-              "correct_index": 0,
+              "correct_index": 2,
               "explanation": "A D flip-flop transfers the exact logic value on data input D to output Q on the active clock edge: Q_next = D."
             },
             {
               "question": "Why does an asynchronous ripple counter suffer from speed limitations at high frequencies?",
               "options": [
-                "Clock signals cascade sequentially through each flip-flop, accumulating cumulative propagation delays",
                 "It consumes too much static memory",
+                "The flip-flops overheat when clocked in parallel",
                 "It can only count down rather than up",
-                "The flip-flops overheat when clocked in parallel"
+                "Clock signals cascade sequentially through each flip-flop, accumulating cumulative propagation delays"
               ],
-              "correct_index": 0,
+              "correct_index": 3,
               "explanation": "In a ripple counter, each stage is clocked by the preceding stage's output. These sequential propagation delays add up, causing transient glitches and limiting maximum clock speed."
             },
             {
               "question": "How many flip-flops are required to construct a modulo-16 (Mod-16) binary ripple counter?",
               "options": [
                 "4 flip-flops",
-                "8 flip-flops",
                 "16 flip-flops",
-                "2 flip-flops"
+                "2 flip-flops",
+                "8 flip-flops"
               ],
               "correct_index": 0,
               "explanation": "A counter with n flip-flops counts 2ⁿ distinct states (from 0 to 2ⁿ - 1). For Mod-16 (16 states), n = log₂(16) = 4 flip-flops."
