@@ -1,6 +1,6 @@
 {
-  "version": "2.0.4",
-  "last_updated": "2026-10-12T09:33:01Z",
+  "version": "2.0.5",
+  "last_updated": "2026-10-12T09:53:13Z",
   "tracks": [
     {
       "id": "number_systems",
@@ -1033,6 +1033,92 @@
               "title": "Asynchronous and Synchronous Binary Counters",
               "url": "https://www.allaboutcircuits.com/textbook/digital/chpt-11/asynchronous-counters/",
               "caption": "Design, clocking, and propagation delay analysis of binary ripple and synchronous counters."
+            }
+          ]
+        },
+        {
+          "id": "multiplexers_decoders_encoders",
+          "title": "Multiplexers, Decoders & Encoders",
+          "summary": "Data selectors, minterm generators, and priority encoders, the standard building blocks of combinational design.",
+          "read_time_minutes": 6,
+          "difficulty": "Intermediate",
+          "tags": [
+            "MUX",
+            "Decoder",
+            "Encoder",
+            "Priority Encoder"
+          ],
+          "content_markdown": "### Multiplexers, Decoders & Encoders\n\nThese are the standard **MSI building blocks** of combinational design. A multiplexer *selects an input*, a decoder *selects an output*, and an encoder reverses what a decoder does.\n\n#### 1. Multiplexer (MUX): The Data Selector\nA $2^n{:}1$ MUX has $2^n$ data inputs, $n$ select lines, and one output $Y$. The select code decides which data input is passed to $Y$.\n* **2:1 MUX:** $Y = \\overline{S}\\,I_0 + S\\,I_1$\n* **4:1 MUX:** $Y = \\overline{S_1}\\,\\overline{S_0}\\,I_0 + \\overline{S_1}\\,S_0\\,I_1 + S_1\\,\\overline{S_0}\\,I_2 + S_1\\,S_0\\,I_3$\n\n**Implementing any function:** feed $n-1$ of the variables to the select lines, then wire each data input to the remaining variable, its complement, $0$, or $1$.\n\n**Example:** $F(A,B,C) = \\sum m(1,2,6,7)$ on a 4:1 MUX with $A$ as $S_1$ and $B$ as $S_0$:\n\n| $AB$ | Minterms | Data input |\n|:---:|:---:|:---:|\n| 00 | $m_0, m_1$ | $I_0 = C$ |\n| 01 | $m_2, m_3$ | $I_1 = \\overline{C}$ |\n| 10 | $m_4, m_5$ | $I_2 = 0$ |\n| 11 | $m_6, m_7$ | $I_3 = 1$ |\n\nResult: $F = \\overline{A}\\,\\overline{B}\\,C + \\overline{A}\\,B\\,\\overline{C} + A\\,B$.\n\n#### 2. Decoder: The Minterm Generator\nAn $n$-to-$2^n$ decoder activates **exactly one** output for each input code. With an enable input $E$, a 2-to-4 decoder is:\n* $Y_0 = E\\,\\overline{A}\\,\\overline{B}$, $\\quad Y_1 = E\\,\\overline{A}\\,B$\n* $Y_2 = E\\,A\\,\\overline{B}$, $\\quad Y_3 = E\\,A\\,B$\n\nEvery output is a minterm, so any function is an **OR of the decoder outputs** for its minterms. For example, $F = \\sum m(1,2,6,7) = Y_1 + Y_2 + Y_6 + Y_7$ from a 3-to-8 decoder.\n\n#### 3. Encoder: The Reverse of a Decoder\nA 4-to-2 encoder converts a one-hot input $D_3 D_2 D_1 D_0$ into a binary code:\n* $A_1 = D_2 + D_3$\n* $A_0 = D_1 + D_3$\n\n> ⚠️ This only works when **exactly one input is high**. If $D_1$ and $D_2$ are both high, the output is $11$, which wrongly looks like $D_3$. Also, $D_0$ active and *no input active* both produce $00$.\n\n#### 4. Priority Encoder\nA priority encoder fixes both problems: when several inputs are high, the **highest-numbered one wins**, and a valid bit reports whether any input is active.\n* $A_1 = D_3 + D_2$\n* $A_0 = D_3 + \\overline{D_2}\\,D_1$\n* $V = D_0 + D_1 + D_2 + D_3$",
+          "action_link": {
+            "type": "circuit",
+            "label": "Build a 4:1 MUX in Circuit Designer",
+            "payload": "Y = (!S1 & !S0 & I0) | (!S1 & S0 & I1) | (S1 & !S0 & I2) | (S1 & S0 & I3)",
+            "mode": "standard"
+          },
+          "quiz": [
+            {
+              "question": "How many select lines does an 8:1 multiplexer need?",
+              "options": [
+                "2",
+                "3",
+                "4",
+                "8"
+              ],
+              "correct_index": 1,
+              "explanation": "Explanation: $2^n = 8$, so $n = \\log_2 8 = 3$ select lines."
+            },
+            {
+              "question": "**In the example $F(A,B,C) = \\sum m(1,2,6,7)$ on a 4:1 MUX with $A$, $B$ as selects, what goes on $I_2$ (select code $AB = 10$)?**",
+              "options": [
+                "$C$",
+                "$\\overline{C}$",
+                "0",
+                "1"
+              ],
+              "correct_index": 2,
+              "explanation": "Explanation: For $AB = 10$ the minterms are $m_4$ and $m_5$, and neither is in the function, so $F = 0$"
+            },
+            {
+              "question": "**In a plain 4-to-2 encoder, what happens if $D_1$ and $D_2$ are high at the same time?**",
+              "options": [
+                "**Output is 11, which looks like $D_3$**",
+                "Output is 00",
+                "Output is 10",
+                "It picks $D_2$ automatically"
+              ],
+              "correct_index": 0,
+              "explanation": "$A_1 = D_2 + D_3 = 1$ and $A_0 = D_1 + D_3 = 1$, giving $11$."
+            },
+            {
+              "question": "**What does the valid bit $V$ of a priority encoder indicate?**",
+              "options": [
+                "Which input has the highest priority",
+                "**At least one input is active, separating “$D_0$ active” from “nothing active”**",
+                "The inputs have even parity",
+                "A double error was detected"
+              ],
+              "correct_index": 1,
+              "explanation": "Both cases output $00$, so $V = 1$ is the only way to tell them apart."
+            }
+          ],
+          "media": [
+            {
+              "type": "link",
+              "title": "Multiplexer",
+              "url": "https://en.wikipedia.org/wiki/Multiplexer",
+              "caption": "Selector circuits, truth tables, and function implementation with MUXes"
+            },
+            {
+              "type": "link",
+              "title": "Binary decoder",
+              "url": "https://en.wikipedia.org/wiki/Binary_decoder",
+              "caption": "Minterm decoding and enable inputs."
+            },
+            {
+              "type": "link",
+              "title": "Priority encoder",
+              "url": "https://en.wikipedia.org/wiki/Priority_encoder",
+              "caption": "Encoders, priority resolution, and the valid output."
             }
           ]
         }
